@@ -1,0 +1,31 @@
+body{
+
+background-image: url('اللمه_الحلوة.jpg');
+background-size: cover;
+background-color: white;
+
+
+}
+#header.content{
+    margin: 20px 0 40px;
+    color: white;
+
+}
+#header::before {
+content: "";
+position: absolute;
+top:0;
+left: 0;
+height: 100%;
+width: 100%;
+background: rgb(0, 0, 0);
+
+}
+#header *{
+
+    z-index: 10;
+}
+img{
+image-rendering: auto;
+
+}

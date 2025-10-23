@@ -1,0 +1,205 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    direction: rtl;
+    padding: 20px;
+    background-color: #f9f9f9;
+    background-image: url('اختار حشوات البرجر.jpg');
+    backdrop-filter: blur(10px);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: white;
+
+}
+label{
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+    font-weight: bold;
+}
+input[type="number"],
+select{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+
+}
+select{
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    transition: border-color 0.3s;
+}
+select:focus{
+    border-color: #007bff;
+    outline: none;
+}
+option{
+    padding: 10px;
+}
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    min-width: 200px;
+
+}
+.dropdown-content label{
+    display: block;
+    margin-bottom: 5px;
+}
+.dropdown.show .dropdown-content{
+    display: block;
+}
+.form-section{
+    background-color:rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    margin: 10px rtl;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+   
+    color: black;
+    width: 90%;
+}
+.checkbox-group{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);/*عمودين*/
+    gap: 10px;
+    max-width: 300px;
+    color: black;
+
+}
+label{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.container{
+    font-family: Arial;
+    background-color:rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    direction: rtl;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    color: white;
+}
+.box{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+h3{
+    margin-top:0 ;
+color: black;
+align-items: center;
+font-size: 40px;
+}
+.column{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    width: 28%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    direction: rtl;
+}
+.checkbox-grid{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    color: black;
+
+}
+.label{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+h5{
+    margin: 0;
+    align-items: center;
+    font-size: 40px;
+    color: black;
+}
+.menu-section{
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 50px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+.price{
+    font-weight: bold;
+    color: #27ae60;
+}
+.menu-item{
+    display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 8px;
+border-bottom: 1px dashed #eee;    
+}
+.menu-section h2{
+    font-size: 22px;
+    color: #c0392b;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+
+}
+nav{
+    background-color: black;
+    color: white;
+    padding: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+nav a{
+     color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: 1px solid #555;
+    border-radius: 10px;
+    transition: 0.3s;
+    background-color: #27ae60;
+   
+}
+nav a:hover{
+    background-color: #c0392b;
+    border-color:rgba(0, 0, 0, 0.6) ;
+    color: #007bff;
+    text-decoration: underline;
+}
+header{
+    padding: 20px;
+}
+.quantity-control{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.quantity-control button
+{
+    width: 10px;
+    height: 10px;
+    font-size: 5px;
+}
+.quantity-control input{
+    width: 10px;
+    text-align: center;
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية للمطعم</title>
+    <link rel="stylesheet" href="تعديلات الصفحة الرئيسية.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Cairo", sans-serif;
+            background: linear-gradient(to bottom right, #fafafa, #f0f0f0);
+            color: #222;
+            overflow-x: hidden;
+            background-image:url('IMG-20250829-WA0007.jpg');
+            backdrop-filter: blur(3px);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        /* ======= Header ======= */
+        header {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(255,255,255,0.3);
+            padding: 10px 0;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 90%;
+            margin: auto;
+        }
+
+        .imges img {
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .imges img:hover {
+            transform: scale(1.1);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul li a {
+            background-color: #444;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #ff6600;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #ff6600;
+        }
+
+        /* زر القائمة للجوال */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ======= Body Sections ======= */
+        section#about {
+            text-align: center;
+            padding: 70px 20px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.65)),
+                        url('your-image.jpg') no-repeat center center/cover;
+            color: white;
+        }
+
+        section#about .column {
+            background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section#about .column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+        section#about p {
+            font-size: 1rem;
+            color: #f2f2f2;
+            line-height: 1.8;
+        }
+
+        section#about a {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        section#about a:hover {
+            background-color: #e05500;
+        }
+
+        /* ======= Footer ======= */
+        footer {
+            background-color: #111;
+            color: #bbb;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 0.9rem;
+            box-shadow: inset 0 3px 10px rgba(255,255,255,0.05);
+        }
+
+        /* ======= Responsive ======= */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                background-color: #333;
+                border-radius: 8px;
+                margin-top: 10px;
+            }
+
+            nav.active {
+                display: block;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            @keyframes fadeIn {
+                from {opacity: 0;}
+                to {opacity: 1;}
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #444;
+            }
+
+            nav ul li a {
+                display: block;
+                width: 100%;
+                padding: 12px;
+            }
+
+            .imges img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="imges">
+                <img src="Saved Pictures/ال يو.jpg" alt="شعار المطعم" width="90" height="80">
+            </div>
+
+            <!-- زر القائمة للجوال -->
+            <button class="menu-toggle" id="menu-btn">☰</button>
+
+            <nav id="main-nav" class="trans">
+                <ul>
+                    <li><a href="يوتيرن الشلال.html" class="btn btn-dark">يوتيرن الشلال</a></li>
+                    <li><a href="يوتيرن الليبي(2.)html.html" class="btn btn-dark">يوتيرن الليبي</a></li>
+                    <li><a href="يوتيرن حدة.html" class="btn btn-dark">يوتيرن حدة</a></li>
+                    <h1>لزيارتنا</h1>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="column">
+        
+            <h1>لحجز طلبك من مطاعم يوتيرن القريب من موقعك</h1>
+            <p>موقع لحجز طلبك من مطاعم يوتيرن تلقائيًا وبطريقة سهلة وسريعة</p>
+            <a href="احجز طلبك الان.html">احجز طلبك الآن</a>
+        </div>
+
+        <div class="column">
+            <h1>اشتهار مطاعم يوتيرن</h1>
+            <p>اكتشف سر تميز مطاعم يوتيرن وأسباب شعبيتها المتزايدة</p>
+            <a href="من نحن.html">من نحن</a>
+        </div>
+
+        <div class="column">
+            <h1>تسجيل الدخول</h1>
+            <p>قم بتسجيل الدخول لإدارة طلباتك بسهولة</p>
+            <a href="تسجيل الدخول.html">تسجيل الدخول</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; جميع الحقوق محفوظة لدى مطاعم يوتيرن @
+    </footer>
+
+    <script>
+        // كود زر القائمة للجوال
+        const menuBtn = document.getElementById("menu-btn");
+        const nav = document.getElementById("main-nav");
+
+        menuBtn.addEventListener("click", () => {
+            nav.classList.toggle("active");
+        });
+    </script>
+</body>
+</html>

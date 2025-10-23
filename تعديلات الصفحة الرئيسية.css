@@ -1,0 +1,202 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:almaraai;
+}
+body{
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: white;
+     background-image: url('وجبة_ترد_الروح.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    
+}
+.container{
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+}
+header{
+ 
+    color: white;
+    padding: 15px 0;
+   
+    
+
+}
+header.logo{
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+} 
+header nav{
+    float: left;
+    color: white;
+} 
+header nav ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding-top: 5px;
+}
+header nav a{
+    color:crimson;
+    text-decoration: none;
+     transition: 0.3s;
+     background-color: #ddd;
+}
+header nav a:hover{
+    text-decoration: underline;
+    color: blue;
+}
+.hero{
+    background: url('Saved\ Pictures/IMG-20250829-WA0004.jpg');
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    color: white;
+    text-align: center;
+}
+.hero-content{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 40px;
+    border-radius: 20px;
+
+    }
+    .btn{
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background:white;
+        color: black;
+        text-decoration: none;
+        border-radius: 10px;
+    }
+    .btn:hover{
+        background: wheat;
+
+    }
+    .about, .services, .contact{
+        padding: 50px 0; 
+        background:linear-gradient(rgba(0,0,0,0.5) ,rgba(0,0,0,0.5)) url('العائدين_الى_صنعاء.jpg') center/ cover no-repeat;
+        color: white;
+        
+    
+    
+    }
+    
+    
+
+    .about-content{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .services.services-boxes{
+        display: flex; 
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        
+    }
+    .services-boxes .box{
+        background: #f9f9f9;
+        padding: 20px;
+        border: 1px solid #ddd;
+        text-align: center;
+        width: 250px;
+        border-radius: 10px;
+    }
+    .contact .social-links{
+        margin-top: 20px;
+    }
+    .contact .social-links a{
+        display: linline-block;
+        margin-right: 15px;
+        text-decoration: none;
+        color: #333;
+    }
+    footer{
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 40px;
+    }
+.change{
+
+color: white;
+font-size: 50px;
+
+display: flex;
+
+}
+h6{
+    direction: rtl;
+}
+.imges{
+    direction: rtl;
+    display: flex;
+    border-radius: 10px;
+}
+.buttom a{
+     display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background:white;
+        color: black;
+        text-decoration: none;
+        border-radius: 10px;
+        direction: rtl;
+}
+.buttom a:hover{
+background-color: rgba(0, 0, 0, 0.5);
+}
+.buttom nav a:hover{
+    text-decoration: underline;
+    color: blue;
+    direction: rtl;
+}
+.row{
+    display: flex;
+    width: 100%;
+  margin:0;
+    padding: 0;
+    direction: rtl;
+    
+}
+.column{
+    flex: 1;
+    padding: 100px;
+  gap: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
+  box-sizing: border-box;
+}
+.right{
+    
+    font-size: 30px;
+}
+.left{
+     background-image: url('IMG-20250829-WA0007.jpg');
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: 100% 100%;
+   
+     font-size: 25px;
+}
+.between{
+   background-image: url('العائدين_الى_صنعاء.jpg');
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: 100% 100%;
+    font-size: 25px;
+    color: black;
+}
+

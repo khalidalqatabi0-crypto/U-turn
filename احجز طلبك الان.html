@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مطاعم يوتيرن | احجز طلبك الآن</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #111;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0 0 80px; /* مساحة للفوتر */
+      line-height: 1.8;
+      animation: fadeIn 1.2s ease-in-out;
+      background-image: url('طريق السعادة.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      backdrop-filter: blur(5px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      background: #000;
+      padding: 10px 20px;
+      border-bottom: 2px solid #d4af37;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      border: 2px solid #d4af37;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .logo img:hover {
+      transform: rotate(5deg) scale(1.05);
+      box-shadow: 0 0 10px #d4af37;
+    }
+
+    .logo h1 {
+      color: #d4af37;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      background: #d4af37;
+      color: #000;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 17px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background: #b38f2f;
+      color: white;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    h1, h2, h3 {
+      color: #d4af37;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select, input[type="number"], textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #d4af37;
+      background: #222;
+      color: white;
+      font-size: 16px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: #ffcc00;
+      background: #1a1a1a;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin: 6px 0;
+      flex-wrap: wrap;
+      transition: 0.3s;
+    }
+
+    .menu-item:hover {
+      border-color: #d4af37;
+      background: #222;
+    }
+
+    .menu-item .price {
+      color: #d4af37;
+      font-weight: bold;
+      min-width: 80px;
+      text-align: left;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #222;
+      border-radius: 8px;
+      padding: 4px 10px;
+    }
+
+    .quantity-control button {
+      background: #d4af37;
+      border: none;
+      color: #000;
+      font-size: 18px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .quantity-control button:hover {
+      background: #b38f2f;
+      color: white;
+    }
+
+    .quantity-control span {
+      font-size: 16px;
+      color: #fff;
+      width: 25px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    /* ✅ قسم الحشوات والصوصات */
+    .fillings-section {
+      background: #1a1a1a;
+      border-radius: 12px;
+      border: 1px solid #333;
+      padding: 20px;
+      margin-top: 25px;
+      box-shadow: 0 0 10px rgba(212,175,55,0.1);
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .checkbox-group label {
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .checkbox-group label:hover {
+      background: #333;
+      border-color: #d4af37;
+      color: #d4af37;
+    }
+
+    input[type="checkbox"] {
+      accent-color: #d4af37;
+      transform: scale(1.2);
+    }
+
+    /* ✅ الفوتر الجديد مع الأزرار والإجمالي */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #000;
+      border-top: 2px solid #d4af37;
+      color: #ffcc00;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px;
+      z-index: 100;
+      box-shadow: 0 -2px 8px rgba(212,175,55,0.2);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-total {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .footer-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-btns button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .send-btn {
+      background: #d4af37;
+      color: #000;
+    }
+
+    .send-btn:hover {
+      background: #b38f2f;
+      color: #fff;
+    }
+
+    .reset-btn {
+      background: #444;
+      color: white;
+    }
+
+    .reset-btn:hover {
+      background: #666;
+    }
+
+    @media (max-width: 600px) {
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="Saved Pictures/ال يو.jpg" alt="شعار مطاعم يوتيرن">
+      <h1>مطاعم يوتيرن</h1>
+    </div>
+    <nav>
+      <a href="index.html">🏠 الصفحة الرئيسية</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>احجز طلبك الآن</h1>
+
+    <label for="branch">اختار الفرع القريب منك</label>
+    <select id="branch" required>
+      <option value="" disabled selected hidden>اختار الفرع القريب منك</option>
+      <option>يوتيرن - فرع الشلال</option>
+      <option>يوتيرن - فرع حدة</option>
+      <option>يوتيرن - فرع الليبي</option>
+    </select>
+
+    <label for="place">أين تحب أن تأكل البرجر</label>
+    <select id="place">
+      <option>قسم المحلي</option>
+      <option>قسم العوائل</option>
+      <option>قسم السفري</option>
+    </select>
+
+    <label for="payment">كيفية الدفع</label>
+    <select id="payment">
+      <option>كاش</option>
+      <option>شبكة</option>
+    </select>
+
+    <!-- بقية القائمة كما هي --> <h3>اختار نوع البرجر 🍔</h3> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مكتملة لحم</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">5200 ري</span> </div> 
+     <div class="menu-item" data-price="4200"> <label><input type="checkbox"> وجبة مكتملة دجاج</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">4200 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مكتملة سمك </label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">4500 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مكتملة نباتي</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">3200 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مفردة لحم</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">3800 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مفردة دجاج</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">2900 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مفردة سمك</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">3300 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مفردة نباتي</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1800 ري</span> </div> <div class="menu-item" data-price="2500"> <label><input type="checkbox"> بطاط الفرايز مع صوصتين</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1300 ري</span> </div> <div class="menu-item" data-price="2500"> <label><input type="checkbox"> بطاط الودجز مع صوصتين</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1300 ري</span> </div> <div class="menu-item" data-price="2500"> <label><input type="checkbox"> مشرب غازي</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">300 ري</span> </div>
+
+    <!-- 🧅 قسم الحشوات -->
+    <div class="fillings-section">
+      <img src="Saved Pictures/اختار حشوات البرجر.jpg" width="100" height="90" alt=""> <h3>اختار الحشوات الخاصة ب البرجر</h3> <div class="checkbox-group"> <label > <input type="checkbox" name="sausese" value="sausese">خس</label> <label > <input type="checkbox" name="sausese" value="sausese">جرجير</label> <label > <input type="checkbox" name="sausese" value="sausese">كينوا</label> <label > <input type="checkbox" name="sausese" value="sausese">خيار</label> <label > <input type="checkbox" name="sausese" value="sausese">طماط</label> <label > <input type="checkbox" name="sausese" value="sausese">بصل</label> <label > <input type="checkbox" name="sausese" value="sausese">خيار مخلل</label> <label > <input type="checkbox" name="sausese" value="sausese">زيتون</label> <label > <input type="checkbox" name="sausese" value="sausese">هلابينو</label> </div> <div class="checkbox-group"> <label > <input type="checkbox" name="sausese" value="sausese">ذرة</label> <label > <input type="checkbox" name="sausese" value="sausese">تبولة</label> <label > <input type="checkbox" name="sausese" value="sausese">بصل محمص</label> <label > <input type="checkbox" name="sausese" value="sausese">بصل مكرمل</label> <label > <input type="checkbox" name="sausese" value="sausese">بزاليا</label> <label > <input type="checkbox" name="sausese" value="sausese">بنجر متبل</label> <label > <input type="checkbox" name="sausese" value="sausese">بطاطس</label> <label > <input type="checkbox" name="sausese" value="sausese">لانشون</label>
+
+     </div> <h1 align="center">الصوصات الذي تريد مع البرجر</h1> <div class="checkbox-group"> <label > <input type="checkbox" name="sausese" value="sausese">رانش</label> <label > <input type="checkbox" name="sausese" value="sausese">كوكتيل</label> <label > <input type="checkbox" name="sausese" value="sausese">باربيكيو</label> <label > <input type="checkbox" name="sausese" value="sausese">ريزو</label> <label > <input type="checkbox" name="sausese" value="sausese">باربيكيو توت</label> <label > <input type="checkbox" name="sausese" value="sausese">سابيسي معتدل</label> <label > <input type="checkbox" name="sausese" value="sausese">سابيسي حار جدا</label> <label > <input type="checkbox" name="sausese" value="sausese">يوتيرن</label> <label > <input type="checkbox" name="sausese" value="sausese">حالي حامض</label> <label > <input type="checkbox" name="sausese" value="sausese">تشيكانا</label> <label > <input type="checkbox" name="sausese" value="sausese">مايتشوب</label> </div> </div> </div>
+
+    <form id="orderForm">
+      <label>📝 ملاحظاتك</label>
+      <textarea placeholder="اكتب ملاحظاتك هنا..."></textarea>
+    </form>
+  </div>
+
+  <!-- ✅ الفوتر الجديد -->
+  <footer>
+    <div class="footer-total" id="total">إجمالي الطلب: 0 ري</div>
+    <div class="footer-btns">
+      <button class="send-btn" onclick="sendOrder()">📦 إرسال الطلب</button>
+      <button class="reset-btn" onclick="resetOrder()">🔄 إعادة تعيين</button>
+    </div>
+  </footer>
+
+  <script>
+    function changeQty(btn, delta) {
+      const item = btn.closest('.menu-item');
+      const spanQty = item.querySelector('.quantity-control span');
+      const priceElem = item.querySelector('.price');
+      const basePrice = parseInt(item.getAttribute('data-price'));
+
+      let qty = parseInt(spanQty.textContent);
+      qty = Math.max(0, qty + delta);
+      spanQty.textContent = qty;
+
+      const total = basePrice * qty;
+      priceElem.textContent = (qty > 0 ? total : basePrice) + " ري";
+
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const items = document.querySelectorAll('.menu-item');
+      let sum = 0;
+      items.forEach(item => {
+        const qty = parseInt(item.querySelector('.quantity-control span').textContent);
+        const basePrice = parseInt(item.getAttribute('data-price'));
+        sum += qty * basePrice;
+      });
+      document.getElementById('total').textContent = "إجمالي الطلب: " + sum + " ري";
+    }
+
+    function sendOrder() {
+      alert("تم إرسال طلبك بنجاح ✅");
+    }
+
+    function resetOrder() {
+      document.getElementById('orderForm').reset();
+      document.querySelectorAll('.quantity-control span').forEach(s => s.textContent = "0");
+      updateTotal();
+    }
+  </script>
+</body>
+</html>

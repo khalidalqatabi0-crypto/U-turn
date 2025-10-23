@@ -1,0 +1,59 @@
+
+body{
+
+  
+    font-size: 50px;
+    color:burlywood;
+ background-image: url('حياكم في يوتيرن.jpg') center center no-repeat;
+height: 100vh;
+position: relative;
+
+ 
+
+}
+ 
+header{
+background-image: url('حياكم في يوتيرن.jpg') center center no-repeat;
+height: 100vh;
+position: relative;
+filter: brightness(50%);
+}
+header *{
+
+    z-index: 10;
+}
+img{
+image-rendering: auto;
+
+}
+.background-image{
+    opacity: 0.5;
+    width: 400px;
+    height: 400px;
+}
+nav{
+    background-color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: none;
+    padding: 10px;
+     direction: rtl;
+     font-size: 20px;
+
+}
+nav a{
+ color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: 1px solid #555;
+    border-radius: 10px;
+    transition: 0.3s;
+    direction: rtl;
+    background-color: white;
+}
+nav a:hover{
+      background-color: #ff4444;
+    border-color: #ff4444;
+    text-decoration: underline;
+    transition: 0.3s;
+}

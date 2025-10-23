@@ -1,0 +1,172 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+    
+    background: linear-gradient(to bottom ,#f0c27b,#4b1248);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('IMG-20250829-WA0005.jpg');
+
+    background-repeat: no-repeat;
+  
+    backdrop-filter:blur(8px);
+    background-size: 100% 100%;
+    
+}
+/*صندوق تسجيل الدخول*/
+.login-container{
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 0 15px  rgba(0, 0, 0, 0.8);
+    width: 320px;
+    padding: 40px 30px;
+    text-align: center;
+    direction: rtl;
+}
+/*عنوان*/
+
+.login-container h1{
+
+    margin-bottom: 20px;
+    font-weight: 700;
+    
+    
+
+     
+}
+.login-form{
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    direction: rtl;
+}
+h1{
+    align-items: center;
+    color: white;
+background-color: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    margin-top: ;
+}
+.login-form label{
+    display: block;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+/*الحقول*/
+
+.login-container input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"]{
+
+    width: 100%;
+    padding: 14px 15px;
+    margin: 10px 0 20px 0;
+    border: none;
+    border-radius: 10px;
+    outline: rgba(255, 255, 255, 0.25);
+    color:black;
+    font-size: 25px;
+  
+}
+.login-form input::placeholder{
+    color: #eee;
+}
+.options{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 15px;
+
+}
+.login-form button{
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.login-form button:hover{
+    background-color: #333;
+}
+.login-form p{
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+.login-form a{
+    color: #fff;
+    text-decoration: underline;
+}
+.login-form input [type="text"]:focus,
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus{
+    background: rgba(255, 255, 255, 0.4);
+}
+/*زر الدخول*/
+
+.login-container button{
+    width: 100%;
+    padding: 14px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #00b4db;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.4s ease;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 180, 219, 0.6);
+}
+.login-form button:hover{
+    background: linear-gradient(to right, #00b4db, #0083b0);
+
+}
+/*رابط نسيت كلمة السر*/
+
+.login-form .forgot{
+    margin-top: 15px;
+    display: block;
+    color: #d0e6ff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+.login-container .forgot:hover{
+    color: #fff;
+
+}
+nav{
+   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    
+     font-size: 20px;
+}
+nav a{
+    color: black;
+    padding: 10px 20px;
+    text-decoration: underline;
+    border: 1px solid #555;
+    border-radius: 10px;
+    transition: 0.3s;
+  
+    background-color: white;
+}
+nav a:hover{
+     background-color: #ff4444;
+    border-color: #ff4444;
+    text-decoration: underline;
+    transition: 0.3s;
+}

@@ -1,0 +1,100 @@
+body{
+    background-image: url('مشوارك_يوتيرن.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    backdrop-filter: blur(10px);
+    color: black;
+    
+    direction: rtl;
+}
+h1{
+    align-items: center;
+    color:white;
+    font-size: 50px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+p{
+    font-size: 30px;
+    color:white;
+}
+.container{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-direction: row-reverse;
+}
+.img{
+    flex: 1;
+}
+.text{
+    flex: 1;
+}
+h2{
+    font-size: 50px;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 20px;
+    align-content: center;
+}
+.content{
+     display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-direction: row-reverse;
+    direction: ltr;
+}
+table{
+  width: 80%;
+  margin: auto;
+  border-collapse: collapse;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+th,td{
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+th{
+    background-color: #009688;
+    color: white;
+    font-size: 18px;
+}
+
+tr:hover{
+background-color: #f1f1f1;
+transition: 0.3s;
+}
+caption{
+    caption-side: top;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+}
+.commption{
+    
+}
+nav{
+   
+    font-size: 20px;
+    direction: rtl;
+    color: black;
+    display: flex;
+}
+nav a{
+background-color: #f1f1f1;
+border: 20px;
+border-radius: 5px;
+padding: 10px;
+color: blue;
+
+}
+nav a:hover{
+    background-color: red;
+    color: blue;
+    decoration: underline;
+    transition: 0.30s;
+}
