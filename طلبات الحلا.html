@@ -491,9 +491,9 @@
       document.getElementById('orderForm').reset();
       document.querySelectorAll('.quantity-control span').forEach(s => s.textContent = "0");
       updateTotal();
-     
+   
 function sendOrder() {
-  const phoneNumber = "967773516718"; // ← ضع رقمك هنا
+  const phoneNumber = "967773516718"; // ← ضع رقمك هنا بدون + أو صفر
   const branch = document.getElementById("branch").value;
   const place = document.getElementById("place").value;
   const payment = document.getElementById("payment").value;
@@ -502,27 +502,36 @@ function sendOrder() {
   let message = `🍔 *طلب جديد من مطاعم يوتيرن*\n`;
   message += `📍 الفرع: ${branch}\n`;
   message += `🪑 المكان: ${place}\n`;
-  message += `💳 الدفع: ${payment}\n\n`;
-
-  // قائمة الطلبات
+  message += `💳 طريقة الدفع: ${payment}\n\n`;
   message += `🧾 *الطلبات:*\n`;
-  const items = document.querySelectorAll('.menu-item');
+
+  const items = document.querySelectorAll(".menu-item");
   items.forEach(item => {
-    const name = item.querySelector('label').textContent.trim();
-    const qty = parseInt(item.querySelector('.quantity-control span').textContent);
-    const price = item.getAttribute('data-price');
+    const name = item.querySelector("label").innerText.trim();
+    const qty = parseInt(item.querySelector(".quantity-control span").textContent);
+    const price = parseInt(item.getAttribute("data-price"));
     if (qty > 0) {
       message += `- ${name} × ${qty} = ${qty * price} ري\n`;
     }
   });
 
-  const total = document.getElementById('total').textContent;
+  const total = document.getElementById("total").textContent;
   message += `\n💰 ${total}\n`;
   message += `📝 ملاحظات: ${notes || "لا توجد"}\n`;
+  message += `\n📅 تم الإرسال من صفحة الطلب عبر الموقع.`;
+
+  // تحديد إذا المستخدم على جوال أو كمبيوتر
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // توليد الرابط المناسب
+  const baseUrl = isMobile
+    ? `https://wa.me/${phoneNumber}?text=`
+    : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=`;
+
+  const finalUrl = baseUrl + encodeURIComponent(message);
 
   // فتح واتساب
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
+  window.open(finalUrl, "_blank");
 }
 
 
