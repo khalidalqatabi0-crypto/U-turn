@@ -16,7 +16,7 @@
       padding: 0 0 80px; /* مساحة للفوتر */
       line-height: 1.8;
       animation: fadeIn 1.2s ease-in-out;
-      background-image: url('طريق السعادة.jpg');
+      background-image: url('الصبوح الروح.jpg');
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: 100% 100%;
@@ -109,42 +109,11 @@
       box-sizing: border-box;
       outline: none;
     }
-     /* زر القائمة للجوال */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-        }
 
     select:focus, input:focus, textarea:focus {
       border-color: #ffcc00;
       background: #1a1a1a;
     }
-     nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 10px;
-        }
-
-        nav ul li a {
-            background-color: #444;
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover {
-            background-color: #ff6600;
-            transform: translateY(-2px);
-        }
-
 
     .menu-item {
       display: flex;
@@ -192,6 +161,41 @@
       font-weight: bold;
       transition: 0.3s;
     }
+     /* زر القائمة للجوال */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+       nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul li a {
+            background-color: #444;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #ff6600;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #ff6600;
+        }
 
     .quantity-control button:hover {
       background: #b38f2f;
@@ -309,14 +313,14 @@
     .reset-btn:hover {
       background: #666;
     }
-     
 
     @media (max-width: 600px) {
       footer {
         flex-direction: column;
         text-align: center;
-      }}
-       /* ======= Responsive ======= */
+      }
+    }
+      /* ======= Responsive ======= */
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -361,10 +365,7 @@
                 width: 70px;
                 height: 70px;
             }
-    }
-     
-
-  
+        }
   </style>
 </head>
 
@@ -374,19 +375,19 @@
       <img src="Saved Pictures/ال يو.jpg" alt="شعار مطاعم يوتيرن">
       <h1>مطاعم يوتيرن</h1>
     </div>
-    <button class="menu-toggle" id="menu-btn">☰</button>
-    <nav id="main-nav" class="trans">
-      <ul>
-   <li>   <a href="index.html">🏠 الصفحة الرئيسية</a></li>
-    <li>    <a href="الطلبات الجانبية.html">الطلبات الجانبية</a></li>
-     <li>  <a href="طلبات التوست.html">التوست</a></li>
-      <li> <a href="طلبات الحلا.html">الحلا</a></li>
-      <li>  <a href="طلبات القهوة.html">القهوة</a></li>
-      <li> <a href="اللحم والدجاج المدخن.html">اللحم,الدجاج المدخن</a></li>
-      <li>  <a href="طلبات الكومبير.html">كومبير</a></li>
-</ul>
+     <button class="menu-toggle" id="menu-btn">☰</button>
+
+            <nav id="main-nav" class="trans">
+                <ul>
+   <li>  <a href="index.html">🏠 الصفحة الرئيسية</a></li> 
+      <li>  <a href="احجز طلبك الان.html">البرجر</a></li> 
+     <li>   <a href="اللحم والدجاج المدخن.html">الحم,الدجاج المدخن</a></li> 
+     <li> <a href="طلبات الحلا.html">الحلا</a></li> 
+    <li>    <a href="طلبات القهوة.html">القهوة</a></li> 
+     <li>   <a href="الطلبات الجانبية.html">الطلبات الجانبية</a></li> 
+    <li>    <a href="طلبات الكومبير.html">كومبير</a></li> 
     </nav>
-    
+  </ul>
   </header>
 
   <div class="container">
@@ -413,15 +414,21 @@
       <option>شبكة</option>
     </select>
 
-    <!-- بقية القائمة كما هي --> <h3>اختار نوع البرجر 🍔</h3> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مكتملة لحم</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">5200 ري</span> </div> 
-     <div class="menu-item" data-price="4200"> <label><input type="checkbox"> وجبة مكتملة دجاج</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">4200 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مكتملة سمك </label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">4500 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مكتملة نباتي</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">3200 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مفردة لحم</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">3800 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مفردة دجاج</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">2900 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مفردة سمك</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">3300 ري</span> </div> <div class="menu-item" data-price="5200"> <label><input type="checkbox"> وجبة مفردة نباتي</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1800 ري</span> </div> <div class="menu-item" data-price="2500"> <label><input type="checkbox"> بطاط الفرايز مع صوصتين</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1300 ري</span> </div> <div class="menu-item" data-price="2500"> <label><input type="checkbox"> بطاط الودجز مع صوصتين</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1300 ري</span> </div> <div class="menu-item" data-price="2500"> <label><input type="checkbox"> مشرب غازي</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">300 ري</span> </div>
+    <!-- بقية القائمة كما هي --> <h3>اختار  التوست الذي تحب</h3>
+      <div class="menu-item" data-price="1100"> <label><input type="checkbox"> توست اومليت</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1100 ري</span> </div> 
+     <div class="menu-item" data-price="1100"> <label><input type="checkbox"> توست تشيسبو</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1100 ري</span> </div>
+      <div class="menu-item" data-price="1200"> <label><input type="checkbox"> نوست اجبان</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1200 ري</span> </div> 
+      <div class="menu-item" data-price="1500"> <label><input type="checkbox"> توست تونه فاخرة</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1500 ري</span> </div>
+       <div class="menu-item" data-price="1800"> <label><input type="checkbox"> توست مرتدلا دجاج</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1800 ري</span> </div> 
+       <div class="menu-item" data-price="1900"> <label><input type="checkbox"> توست مرتدلا لحم</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1900 ري</span> </div>
+        <div class="menu-item" data-price="2000"> <label><input type="checkbox"> توست منزرلا طماطم</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">2000 ري</span> </div>
+         <div class="menu-item" data-price="1400"> <label><input type="checkbox"> توست شوكلات</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1400 ري</span> </div> 
+         <div class="menu-item" data-price="500"> <label><input type="checkbox"> براد ك شاي </label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">500 ري</span> </div> 
+         <div class="menu-item" data-price="1000"> <label><input type="checkbox"> براد ص شاي </label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1000 ري</span> </div> 
+         <div class="menu-item" data-price="300"> <label><input type="checkbox"> مشرب غازي</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">300 ري</span> </div>
+ <div class="menu-item" data-price="100"> <label><input type="checkbox"> قارورة ماء</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">100 ري</span> </div>
 
-    <!-- 🧅 قسم الحشوات -->
-    <div class="fillings-section">
-      <img src="Saved Pictures/اختار حشوات البرجر.jpg" width="100" height="90" alt=""> <h3>اختار الحشوات الخاصة ب البرجر</h3> <div class="checkbox-group"> <label > <input type="checkbox" name="sausese" value="sausese">خس</label> <label > <input type="checkbox" name="sausese" value="sausese">جرجير</label> <label > <input type="checkbox" name="sausese" value="sausese">كينوا</label> <label > <input type="checkbox" name="sausese" value="sausese">خيار</label> <label > <input type="checkbox" name="sausese" value="sausese">طماط</label> <label > <input type="checkbox" name="sausese" value="sausese">بصل</label> <label > <input type="checkbox" name="sausese" value="sausese">خيار مخلل</label> <label > <input type="checkbox" name="sausese" value="sausese">زيتون</label> <label > <input type="checkbox" name="sausese" value="sausese">هلابينو</label> </div> <div class="checkbox-group"> <label > <input type="checkbox" name="sausese" value="sausese">ذرة</label> <label > <input type="checkbox" name="sausese" value="sausese">تبولة</label> <label > <input type="checkbox" name="sausese" value="sausese">بصل محمص</label> <label > <input type="checkbox" name="sausese" value="sausese">بصل مكرمل</label> <label > <input type="checkbox" name="sausese" value="sausese">بزاليا</label> <label > <input type="checkbox" name="sausese" value="sausese">بنجر متبل</label> <label > <input type="checkbox" name="sausese" value="sausese">بطاطس</label> <label > <input type="checkbox" name="sausese" value="sausese">لانشون</label>
-
-     </div> <h1 align="center">الصوصات الذي تريد مع البرجر</h1> <div class="checkbox-group"> <label > <input type="checkbox" name="sausese" value="sausese">رانش</label> <label > <input type="checkbox" name="sausese" value="sausese">كوكتيل</label> <label > <input type="checkbox" name="sausese" value="sausese">باربيكيو</label> <label > <input type="checkbox" name="sausese" value="sausese">ريزو</label> <label > <input type="checkbox" name="sausese" value="sausese">باربيكيو توت</label> <label > <input type="checkbox" name="sausese" value="sausese">سابيسي معتدل</label> <label > <input type="checkbox" name="sausese" value="sausese">سابيسي حار جدا</label> <label > <input type="checkbox" name="sausese" value="sausese">يوتيرن</label> <label > <input type="checkbox" name="sausese" value="sausese">حالي حامض</label> <label > <input type="checkbox" name="sausese" value="sausese">تشيكانا</label> <label > <input type="checkbox" name="sausese" value="sausese">مايتشوب</label> </div> </div> </div>
-
+    
     <form id="orderForm">
       <label>📝 ملاحظاتك</label>
       <textarea placeholder="اكتب ملاحظاتك هنا..."></textarea>
@@ -438,7 +445,7 @@
   </footer>
 
   <script>
-     // كود زر القائمة للجوال
+      // كود زر القائمة للجوال
         const menuBtn = document.getElementById("menu-btn");
         const nav = document.getElementById("main-nav");
 
@@ -480,7 +487,6 @@
       document.getElementById('orderForm').reset();
       document.querySelectorAll('.quantity-control span').forEach(s => s.textContent = "0");
       updateTotal();
-       
     }
   </script>
 </body>
