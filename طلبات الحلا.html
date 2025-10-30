@@ -448,94 +448,90 @@
     </div>
   </footer>
 
-  <script>
-      // كود زر القائمة للجوال
-        const menuBtn = document.getElementById("menu-btn");
-        const nav = document.getElementById("main-nav");
+ <script>
+  // زر القائمة للجوال
+  const menuBtn = document.getElementById("menu-btn");
+  const nav = document.getElementById("main-nav");
 
-        menuBtn.addEventListener("click", () => {
-            nav.classList.toggle("active");
-        });
-    function changeQty(btn, delta) {
-      const item = btn.closest('.menu-item');
-      const spanQty = item.querySelector('.quantity-control span');
-      const priceElem = item.querySelector('.price');
-      const basePrice = parseInt(item.getAttribute('data-price'));
-
-      let qty = parseInt(spanQty.textContent);
-      qty = Math.max(0, qty + delta);
-      spanQty.textContent = qty;
-
-      const total = basePrice * qty;
-      priceElem.textContent = (qty > 0 ? total : basePrice) + " ري";
-
-      updateTotal();
-    }
-
-    function updateTotal() {
-      const items = document.querySelectorAll('.menu-item');
-      let sum = 0;
-      items.forEach(item => {
-        const qty = parseInt(item.querySelector('.quantity-control span').textContent);
-        const basePrice = parseInt(item.getAttribute('data-price'));
-        sum += qty * basePrice;
-      });
-      document.getElementById('total').textContent = "إجمالي الطلب: " + sum + " ري";
-    }
-
-    function sendOrder() {
-      alert("تم إرسال طلبك بنجاح ✅");
-    }
-
-    function resetOrder() {
-      document.getElementById('orderForm').reset();
-      document.querySelectorAll('.quantity-control span').forEach(s => s.textContent = "0");
-      updateTotal();
-   
-function sendOrder() {
-  const phoneNumber = "967773516718"; // ← ضع رقمك هنا بدون + أو صفر
-  const branch = document.getElementById("branch").value;
-  const place = document.getElementById("place").value;
-  const payment = document.getElementById("payment").value;
-  const notes = document.querySelector("textarea").value;
-
-  let message = `🍔 *طلب جديد من مطاعم يوتيرن*\n`;
-  message += `📍 الفرع: ${branch}\n`;
-  message += `🪑 المكان: ${place}\n`;
-  message += `💳 طريقة الدفع: ${payment}\n\n`;
-  message += `🧾 *الطلبات:*\n`;
-
-  const items = document.querySelectorAll(".menu-item");
-  items.forEach(item => {
-    const name = item.querySelector("label").innerText.trim();
-    const qty = parseInt(item.querySelector(".quantity-control span").textContent);
-    const price = parseInt(item.getAttribute("data-price"));
-    if (qty > 0) {
-      message += `- ${name} × ${qty} = ${qty * price} ري\n`;
-    }
+  menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("active");
   });
 
-  const total = document.getElementById("total").textContent;
-  message += `\n💰 ${total}\n`;
-  message += `📝 ملاحظات: ${notes || "لا توجد"}\n`;
-  message += `\n📅 تم الإرسال من صفحة الطلب عبر الموقع.`;
+  // تعديل الكمية
+  function changeQty(btn, delta) {
+    const item = btn.closest('.menu-item');
+    const spanQty = item.querySelector('.quantity-control span');
+    const priceElem = item.querySelector('.price');
+    const basePrice = parseInt(item.getAttribute('data-price'));
 
-  // تحديد إذا المستخدم على جوال أو كمبيوتر
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    let qty = parseInt(spanQty.textContent);
+    qty = Math.max(0, qty + delta);
+    spanQty.textContent = qty;
 
-  // توليد الرابط المناسب
-  const baseUrl = isMobile
-    ? `https://wa.me/${phoneNumber}?text=`
-    : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=`;
+    const total = basePrice * qty;
+    priceElem.textContent = (qty > 0 ? total : basePrice) + " ري";
 
-  const finalUrl = baseUrl + encodeURIComponent(message);
+    updateTotal();
+  }
 
-  // فتح واتساب
-  window.open(finalUrl, "_blank");
-}
+  // تحديث الإجمالي
+  function updateTotal() {
+    const items = document.querySelectorAll('.menu-item');
+    let sum = 0;
+    items.forEach(item => {
+      const qty = parseInt(item.querySelector('.quantity-control span').textContent);
+      const basePrice = parseInt(item.getAttribute('data-price'));
+      sum += qty * basePrice;
+    });
+    document.getElementById('total').textContent = "إجمالي الطلب: " + sum + " ري";
+  }
 
+  // ✅ دالة إرسال الطلب إلى واتساب
+  function sendOrder() {
+    const phoneNumber = "967773516718"; // ← رقمك هنا بدون + أو صفر
+    const branch = document.getElementById("branch").value;
+    const place = document.getElementById("place").value;
+    const payment = document.getElementById("payment").value;
+    const notes = document.querySelector("textarea").value;
 
-    }
-  </script>
+    let message = `🍔 *طلب جديد من مطاعم يوتيرن*\n`;
+    message += `📍 الفرع: ${branch}\n`;
+    message += `🪑 المكان: ${place}\n`;
+    message += `💳 طريقة الدفع: ${payment}\n\n`;
+    message += `🧾 *الطلبات:*\n`;
+
+    const items = document.querySelectorAll(".menu-item");
+    items.forEach(item => {
+      const name = item.querySelector("label").innerText.trim();
+      const qty = parseInt(item.querySelector(".quantity-control span").textContent);
+      const price = parseInt(item.getAttribute("data-price"));
+      if (qty > 0) {
+        message += `- ${name} × ${qty} = ${qty * price} ري\n`;
+      }
+    });
+
+    const total = document.getElementById("total").textContent;
+    message += `\n💰 ${total}\n`;
+    message += `📝 ملاحظات: ${notes || "لا توجد"}\n`;
+    message += `\n📅 تم الإرسال من صفحة الطلب عبر الموقع.`;
+
+    // تحديد الجهاز (جوال أو كمبيوتر)
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const baseUrl = isMobile
+      ? `https://wa.me/${phoneNumber}?text=`
+      : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=`;
+
+    const finalUrl = baseUrl + encodeURIComponent(message);
+    window.open(finalUrl, "_blank");
+  }
+
+  // إعادة تعيين الطلب
+  function resetOrder() {
+    document.getElementById('orderForm').reset();
+    document.querySelectorAll('.quantity-control span').forEach(s => s.textContent = "0");
+    updateTotal();
+  }
+</script>
+
 </body>
 </html>
