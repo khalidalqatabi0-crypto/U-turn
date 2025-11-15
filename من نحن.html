@@ -4,7 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>من نحن | يوتيرن</title>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+
+
   <style>
+     .social-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    animation: glowBox 4s linear infinite;
+  }
+
+  /* وهج متغير بلون نيون متدرج */
+  @keyframes glowBox {
+    0% { box-shadow: 0 0 10px #00c6ff; border: 2px solid #00c6ff; }
+    25% { box-shadow: 0 0 15px #ff00c8; border: 2px solid #ff00c8; }
+    50% { box-shadow: 0 0 15px #8a2be2; border: 2px solid #8a2be2; }
+    75% { box-shadow: 0 0 15px #00ffea; border: 2px solid #00ffea; }
+    100% { box-shadow: 0 0 10px #00c6ff; border: 2px solid #00c6ff; }
+  }
+
+  .icon-box i {
+    font-size: 28px;
+    color: white;
+    transition: transform 0.4s ease, color 0.4s ease;
+    animation: softGlow 3s infinite ease-in-out;
+  }
+
+  /* وميض داخلي ناعم */
+  @keyframes softGlow {
+    0% { text-shadow: 0 0 5px currentColor; opacity: 0.8; }
+    50% { text-shadow: 0 0 15px currentColor; opacity: 1; }
+    100% { text-shadow: 0 0 5px currentColor; opacity: 0.8; }
+  }
+
+  /* عند المرور بالماوس */
+  .icon-box:hover i {
+    transform: scale(1.4) rotate(8deg);
+  }
+
+  /* 🎨 ألوان التطبيقات */
+  .ri-facebook-fill { color: #1877f2; }
+  .ri-instagram-line {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .ri-tiktok-fill { color: #000; }
+  .ri-twitter-x-line { color: #000; }
+  .ri-linkedin-fill { color: #0a66c2; }
+  .ri-snapchat-line { color: #fffc00; }
     body {
       font-family: "Cairo", sans-serif;
       margin: 0;
@@ -151,8 +217,121 @@
       .text {
         font-size: 16px;
       }
+      .footer__container{
+    grid-template-columns: repeat(2 , 1fr);
+}
+.footer__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer__socials {
+    justify-content: center;
+  }
+
+  .btn {
+    width: 100%;
+  }
+    }
+    ol{
+      color:#000;
+    }
+    ul{
+      color: #000;
+    }
+    footer {
+      background-color: #000;
+      color: #fff;
+      padding: 40px 20px;
+      font-family: "Cairo", sans-serif;
+      border-top: 5px solid #e63946;
     }
 
+    .footer__container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer__logo a {
+      font-size: 24px;
+      font-weight: 800;
+      color: #e63946;
+      text-decoration: none;
+    }
+
+    .footer__col p {
+      margin: 15px 0;
+      color: #ddd;
+      line-height: 1.8;
+    }
+
+    .footer__socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .footer__socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background-color:white;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 18px;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .footer__socials a:hover {
+      background-color: #457b9d;
+      transform: scale(1.1);
+    }
+
+    .footer__col h4 {
+      margin-bottom: 15px;
+      color: #f4f4f9;
+      border-bottom: 2px solid #e63946;
+      display: inline-block;
+      padding-bottom: 5px;
+      font-size: 18px;
+    }
+
+    .footer__links a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      margin: 6px 0;
+      transition: 0.3s;
+    }
+
+    .footer__links a:hover {
+      color: #fff;
+      transform: translateX(-5px);
+    }
+
+    .footer__bar {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 15px;
+      color: #aaa;
+      border-top: 1px solid #333;
+      padding-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      footer {
+        text-align: center;
+      }
+      .footer__socials {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 
@@ -197,6 +376,62 @@
       <h2>يوتيرن الليبي</h2>
       <p>
         بعد أربع سنوات من النجاح، افتتح فرع يوتيرن الليبي في نهاية عام 2024، في موقع فريد بمواقف السيارات، بتصميم كرفانة مميز من تصميم الأستاذ نجيب الحجي. ويضم القسم خصوصية كاملة للسيدات.
+      </p>
+    </div>
+  </div>
+   <hr>
+   <!-- 🏢 خارطة فروع يوتيرن-->
+  <div class="container">
+    <img src="Saved Pictures/٢٠٢٥٠٧٢٧_٢١٣٢٣٤_1 - نسخ .jpg" alt="يوتيرن الليبي">
+    <div class="text">
+      <h2>خارطة فروع يوتيرن</h2>
+      <p>
+       خارطة فروع يوتيرن تمثل خط السير بين يوتيرن الشلال ويوتيرن حدة ويوتيرن الليبي وانت تختار الفرع الاقرب لك
+      </p>
+    </div>
+  </div>
+   <hr>
+   <!-- 🏢 انواع الخبز-->
+  <div class="container">
+    <img src="Saved Pictures/IMG-20250829-WA0001.jpg" alt="يوتيرن الليبي">
+    <div class="text">
+      <h2>انواع الخبز في يوتيرن</h2>
+      <p>
+
+       <ul>
+        <ol>الخبز الابيض </ol><ol>الخبز الاسمر</ol><ol>الخبز البريوش</ol><ol>خبز الاطفال</ol>
+        <li>هذه انواع الخبز المقدم في يوتيرن وانت اختار النوع الذي تحب</li>
+       </ul>
+      </p>
+    </div>
+  </div>
+
+  <hr>
+
+   <!-- 🏢 شرائح مع البرجر-->
+  <div class="container">
+    <img src="IMG-20251105-WA0013.jpg" alt="يوتيرن الليبي">
+    <div class="text">
+      <h2>انواع البرجر</h2>
+      <p>
+       
+       <ul>
+        <ol>شريحة لحم</ol><ol>شريحة دجاج</ol><ol>شريحة سمك</ol><ol>شريحة نباتي</ol>
+        <li>هذه انواع البرجر المقدم في يوتيرن وانت اختار النوع الذي تحب</li>
+       </ul>
+      </p>
+    </div>
+  </div>
+
+  <hr>
+   <!-- 🏢 الاستاذ نجيب الحجي-->
+  <div class="container">
+    <img src="Saved Pictures/٢٠٢٥١١٠٥_١٤٣٥٥٦.jpg" alt="يوتيرن الليبي">
+    <div class="text">
+      <h2>مالك مطاعم يوتيرن</h2>
+      <p>
+       
+       الاستاذ نجيب الحجي صاحب برند يوتيرن 
       </p>
     </div>
   </div>
@@ -247,7 +482,45 @@
   </table>
 
   <footer>
-    جميع الحقوق محفوظة © مطاعم يوتيرن 2025
+ 
+    <div class="section__container footer__container">
+        <div class="footer__col">
+            <div class="footer__logo">
+                <a href="#">مطاعم يوتيرن</a>
+            </div>
+            <p>البدايات كانت من فرع الشلال مع كثير من الصعوبات والمشاكل ولاكن ب توفيق من الله تجاوزنا كل الصعوبات والمشاكل</p>
+         <div class="social-icons">
+  <div class="icon-box"><a href="https://www.facebook.com/share/17UJUJAKhr/"><i class="ri-facebook-fill"></i></a></div>
+  <div class="icon-box"><a href="https://www.instagram.com/uturn.ye?igsh=MWh1amo1MTVpa2tkYw=="><i class="ri-instagram-line"></i></a></div>
+  <div class="icon-box"><i class="ri-tiktok-fill"></i><a href="#"></a></div>
+  <div class="icon-box"><i class="ri-twitter-x-line"><a href="#"></a></i></div>
+ 
+</div>
+
+
+        <div class="footer__links">
+            <h4>فروع يوتيرن</h4>
+            <ul class="footer__links">
+                <li><a href="يوتيرن الشلال.html">يوتيرن الشلال</a></li>
+                   <li><a href="يوتيرن الليبي(2.)html.html">يوتيرن الليبي</a></li>
+                      <li><a href="يوتيرن حدة.html">يوتيرن حدة</a></li>
+                         <li><a href="من نحن.html">من نحن</a></li>
+            </ul>
+        </div>
+             <div class="footer__links">
+            <h4>لحجز طلبك</h4>
+            <ul class="footer__links">
+                <li><a href="احجز طلبك الان.html">احجز طلبك الان</a></li>
+                  
+            </ul>
+        </div>
+          
+        
+        
+    </div>
+   
+
+   &copy; جميع الحقوق محفوظة  مطاعم يوتيرن 2025
   </footer>
 
 </body>
