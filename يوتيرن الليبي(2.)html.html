@@ -18,33 +18,45 @@
       font-family: "Cairo", sans-serif;
     }
 
-    nav {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 10px;
+   nav {
+    
+    
+      background-color: rgba(0, 0, 0, 0.8);
+    
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+     
       text-align: center;
+
     }
 
     nav ul {
       list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       justify-content: center;
       gap: 15px;
-      padding: 0;
-      margin: 0;
+  
     }
 
     nav a {
       color: #fff;
-      background-color: #ff4d4d;
-      padding: 10px 20px;
       text-decoration: none;
+      background-color: #e63946;
+      padding: 10px 20px;
       border-radius: 10px;
-      font-size: 18px;
       transition: 0.3s;
+      font-weight: bold;
+      font-size: 18px;
+      position: sticky;
     }
 
     nav a:hover {
-      background-color: #0077b6;
+      background-color: #457b9d;
     }
 
     h1 {

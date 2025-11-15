@@ -1,251 +1,371 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصفحة الرئيسية للمطعم</title>
-    <link rel="stylesheet" href="تعديلات الصفحة الرئيسية.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: "Cairo", sans-serif;
-            background: linear-gradient(to bottom right, #fafafa, #f0f0f0);
-            color: #222;
-            overflow-x: hidden;
-            background-image:url('IMG-20250829-WA0007.jpg');
-            backdrop-filter: blur(3px);
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+<title>مطاعم يوتيرن | التطبيق</title>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
-        /* ======= Header ======= */
-        header {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 3px 10px rgba(255,255,255,0.3);
-            padding: 10px 0;
-        }
+<style>
+/* ===== عام ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
-        header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            width: 90%;
-            margin: auto;
-        }
+:root{
+  --bg-dark: linear-gradient(180deg,#151515 0%, #231811 100%);
+  --accent: #c08752;
+  --glass: rgba(255,255,255,0.04);
+  --glass-strong: rgba(255,255,255,0.06);
+  --text: #fff;
+  --muted: #dcd6d0;
+  --card-radius: 16px;
+}
 
-        .imges img {
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
+html, body {
+  margin:0; padding:0;
+  width:100%; height:100%;
+  background: var(--bg-dark);
+  font-family:"Cairo",sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow: hidden;
+}
 
-        .imges img:hover {
-            transform: scale(1.1);
-        }
+/* ===== حاوية التطبيق ===== */
+.app-shell{
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction:column;
+  overflow:auto;
+  position:relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+}
 
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 10px;
-        }
+/* ===== شاشة البداية ===== */
+#splash {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  z-index:50;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+  backdrop-filter: blur(6px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+#splash img.logo-splash {
+  width:130px; height:130px;
+  border-radius:28px;
+  object-fit:cover;
+  box-shadow:0 16px 40px rgba(0,0,0,0.6), 0 0 30px rgba(192,135,82,0.12);
+  animation: popIn .9s ease forwards;
+}
+#splash h2 { margin:14px 0 6px; color:#f5d7a1; font-size:20px; }
+#splash .loader {
+  width:46px;height:46px;border-radius:50%;
+  border:5px solid rgba(245,215,161,0.3);
+  border-top:5px solid var(--accent);
+  animation: spin 1s linear infinite;
+  margin-top:12px;
+}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes popIn{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
 
-        nav ul li a {
-            background-color: #444;
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
+/* ===== الهيدر ===== */
+header.app-header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 14px; gap:10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+.brand{ display:flex;align-items:center; gap:10px; }
+.brand img{ width:46px;height:46px;border-radius:12px; object-fit:cover; box-shadow:0 8px 18px rgba(0,0,0,0.6);}
+.brand h1{ margin:0;font-size:16px;color:var(--accent); font-weight:700; }
+.header-actions{ display:flex;align-items:center; gap:8px; }
+.btn-icon{ width:42px;height:42px;border-radius:10px; display:grid; place-items:center; cursor:pointer; background:var(--glass); border:1px solid rgba(255,255,255,0.03); transition:transform .18s ease;}
+.btn-icon:active{transform:scale(.96);}
+.notification-dot::after{ content:"";position:absolute;top:6px;left:6px;width:8px;height:8px;border-radius:50%; background:#ff4d4f;border:2px solid #120b06;}
 
-        nav ul li a:hover {
-            background-color: #ff6600;
-            transform: translateY(-2px);
-        }
+/* ===== المحتوى ===== */
+main.app-body{
+  flex:1; padding:16px; overflow:auto; -webkit-overflow-scrolling:touch;
+}
 
-        h1 {
-            font-size: 1.5rem;
-            color: #ff6600;
-        }
+/* Cards */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  border-radius:var(--card-radius);
+  padding:14px; margin-bottom:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.45);
+  border:1px solid rgba(255,255,255,0.03);
+  transition: transform .28s cubic-bezier(.2,.9,.25,1), box-shadow .28s;
+}
+.card:hover{ transform:translateY(-6px); }
 
-        /* زر القائمة للجوال */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-        }
+.hero{ display:flex; gap:12px; align-items:center; }
+.hero .left{ flex:1; }
+.hero h2{ margin:0 0 6px; font-size:18px; color:var(--accent); }
+.hero p{ margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
+.cta{ display:inline-block; margin-top:10px; padding:10px 16px;border-radius:12px; background: linear-gradient(90deg,var(--accent), #e0a46e); color:#fff;text-decoration:none;font-weight:700; box-shadow:0 8px 18px rgba(192,135,82,0.18); }
 
-        /* ======= Body Sections ======= */
-        section#about {
-            text-align: center;
-            padding: 70px 20px;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.65)),
-                        url('your-image.jpg') no-repeat center center/cover;
-            color: white;
-        }
+/* شبكة الكروت الصغيرة */
+.grid-2{ display:grid;grid-template-columns:repeat(2,1fr);gap:12px; }
+.small-card{ padding:12px;border-radius:12px;background:var(--glass-strong);text-align:center; }
+.small-card i{font-size:22px;margin-bottom:8px;display:block;color:var(--accent);}
+.small-card p{margin:0;color:var(--muted);font-weight:600;}
 
-        section#about .column {
-            background-color: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px auto;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+/* قسم الفروع */
+.branch-list{ display:flex;flex-direction:column; gap:10px; }
+.branch{ padding:12px;border-radius:12px;background:rgba(255,255,255,0.02); display:flex;justify-content:space-between;align-items:center; border:1px solid rgba(255,255,255,0.02); }
+.branch .info p{margin:0;font-size:14px;color:var(--muted);}
 
-        section#about .column:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-        }
+/* Bottom navigation */
+.bottom-nav{
+  height:64px; display:flex; justify-content:space-around; align-items:center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.06));
+  border-top:1px solid rgba(255,255,255,0.03);
+  position:sticky; bottom:0; z-index:40; padding:6px 10px; backdrop-filter: blur(6px);
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);
+  font-size:12px;text-decoration:none;
+  width:64px;padding:6px;border-radius:12px;cursor:pointer;
+  transition: all .18s ease;
+}
+.nav-item.active{ color:var(--accent); transform:translateY(-6px); background: linear-gradient(180deg, rgba(192,135,82,0.06), rgba(192,135,82,0.02));}
+.nav-item i{ font-size:20px }
 
-        section#about p {
-            font-size: 1rem;
-            color: #f2f2f2;
-            line-height: 1.8;
-        }
+/* Floating WhatsApp */
+.whatsapp-fab{
+  position:absolute; left:16px; bottom:84px;
+  width:56px;height:56px;border-radius:14px;
+  display:grid;place-items:center;cursor:pointer;
+  background: linear-gradient(90deg,#25D366,#1DA851);
+  box-shadow:0 12px 30px rgba(0,0,0,0.5);
+  border:2px solid rgba(255,255,255,0.06);
+  z-index:60; transition: transform .16s;
+}
+.whatsapp-fab:active{ transform:scale(.96); }
 
-        section#about a {
-            display: inline-block;
-            margin-top: 10px;
-            background-color: #ff6600;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
+/* أيقونات التواصل */
+.social-row{ display:flex;gap:10px; justify-content:center; margin-top:8px }
+.icon-box{ width:46px;height:46px;border-radius:12px;background:#111;border:1px solid rgba(255,255,255,0.03); display:grid;place-items:center; transition: transform .18s; }
+.icon-box:hover{ transform:translateY(-6px); }
 
-        section#about a:hover {
-            background-color: #e05500;
-        }
+/* تجاوب كامل */
+@media (max-width:420px){ .app-shell{ border-radius:0; } .brand h1{ font-size:15px } .nav-item{ width:56px } }
 
-        /* ======= Footer ======= */
-        footer {
-            background-color: #111;
-            color: #bbb;
-            text-align: center;
-            padding: 20px 10px;
-            font-size: 0.9rem;
-            box-shadow: inset 0 3px 10px rgba(255,255,255,0.05);
-        }
-
-        /* ======= Responsive ======= */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                display: none;
-                width: 100%;
-                background-color: #333;
-                border-radius: 8px;
-                margin-top: 10px;
-            }
-
-            nav.active {
-                display: block;
-                animation: fadeIn 0.3s ease-in-out;
-            }
-
-            @keyframes fadeIn {
-                from {opacity: 0;}
-                to {opacity: 1;}
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid #444;
-            }
-
-            nav ul li a {
-                display: block;
-                width: 100%;
-                padding: 12px;
-            }
-
-            .imges img {
-                width: 70px;
-                height: 70px;
-            }
-        }
-    </style>
+</style>
 </head>
-
 <body>
-    <header>
-        <div class="container">
-            <div class="imges">
-                <img src="Saved Pictures/ال يو.jpg" alt="شعار المطعم" width="90" height="80">
-            </div>
 
-            <!-- زر القائمة للجوال -->
-            <button class="menu-toggle" id="menu-btn">☰</button>
+<div class="app-shell" id="appShell">
 
-            <nav id="main-nav" class="trans">
-                <ul>
-                    <li><a href="يوتيرن الشلال.html" class="btn btn-dark">يوتيرن الشلال</a></li>
-                    <li><a href="يوتيرن الليبي(2.)html.html" class="btn btn-dark">يوتيرن الليبي</a></li>
-                    <li><a href="يوتيرن حدة.html" class="btn btn-dark">يوتيرن حدة</a></li>
-                    <h1>لزيارتنا</h1>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <!-- شاشة البداية -->
+  <div id="splash">
+    <img class="logo-splash" src="Saved Pictures/ال يو.jpg" alt="شعار يوتيرن">
+    <h2>مطاعم يوتيرن</h2>
+    <div class="loader"></div>
+  </div>
 
-    <section id="about">
-        <div class="column">
-        
-            <h1>لحجز طلبك من مطاعم يوتيرن القريب من موقعك</h1>
-            <p>موقع لحجز طلبك من مطاعم يوتيرن تلقائيًا وبطريقة سهلة وسريعة</p>
-            <a href="احجز طلبك الان.html">احجز طلبك الآن</a>
-        </div>
+  <!-- الهيدر -->
+  <header class="app-header">
+    <div class="brand">
+      <img src="Saved Pictures/ال يو.jpg" alt="logo">
+      <div>
+        <h1>يوتيرن</h1>
+        <div style="font-size:12px;color:var(--muted)">أقرب مطعم لك</div>
+      </div>
+    </div>
 
-        <div class="column">
-            <h1>اشتهار مطاعم يوتيرن</h1>
-            <p>اكتشف سر تميز مطاعم يوتيرن وأسباب شعبيتها المتزايدة</p>
-            <a href="من نحن.html">من نحن</a>
-        </div>
+    <div class="header-actions">
+      <div class="btn-icon notification-dot" id="notifBtn" title="الإشعارات">
+        <i class="ri-notification-2-line"></i>
+      </div>
+      <div class="btn-icon" id="searchBtn" title="بحث">
+        <i class="ri-search-line"></i>
+      </div>
+    </div>
+  </header>
 
-        <div class="column">
-            <h1>تسجيل الدخول</h1>
-            <p>قم بتسجيل الدخول لإدارة طلباتك بسهولة</p>
-            <a href="تسجيل الدخول.html">تسجيل الدخول</a>
-        </div>
+  <!-- المحتوى الرئيسي -->
+  <main class="app-body" id="mainContent">
+    <section class="card hero">
+      <div class="left">
+        <h2>احجز طلبك من أقرب فرع</h2>
+        <p>اطلب الآن، وسنوصل لك بسرعة — اختر الفرع وابدأ الطلب بسهولة.</p>
+        <a class="cta" id="reserveBtn" href="احجز طلبك الان.html">احجز طلبك الآن</a>
+      </div>
+      <div class="right">
+        <img src="Saved Pictures/ال يو.jpg" alt="شعار" style="width:96px;height:96px;border-radius:14px;object-fit:cover;">
+      </div>
     </section>
+<div class="grid-2" id="dddd" style="grid-template-columns: repeat(3, 1fr);">
+  <div class="card small-card" id="cardMenu">
+    <i class="ri-restaurant-line"></i>
+    <p>القائمة</p>
+  </div>
 
-    <footer>
-        &copy; جميع الحقوق محفوظة لدى مطاعم يوتيرن @
-    </footer>
+  <div class="card small-card" id="cardBranches">
+    <i class="ri-map-pin-line"></i>
+    <p>الفروع</p>
+  </div>
 
-    <script>
-        // كود زر القائمة للجوال
-        const menuBtn = document.getElementById("menu-btn");
-        const nav = document.getElementById("main-nav");
+  <div class="card small-card" id="cardAbout">
+    <i class="ri-information-line"></i>
+    <p>من نحن</p>
+  </div>
+</div>
 
-        menuBtn.addEventListener("click", () => {
-            nav.classList.toggle("active");
-        });
-    </script>
+
+    <div class="card">
+      <h3 style="margin:0 0 8px;color:var(--accent)">اشتهار مطاعم يوتيرن</h3>
+      <p style="margin:0 0 12px;color:var(--muted)">اكتشف سر تميزنا— جودة، سرعة وخدمة مميزة ترفع من تجربتك.</p>
+
+      <div class="branch-list" id="branches">
+        <div class="branch">
+          <div class="info">
+            <strong>يوتيرن الشلال</strong>
+            <p>الحده — يبعد 2.1 كم</p>
+          </div>
+          <a class="cta" href="يوتيرن الشلال.html" style="padding:8px 10px;font-size:13px">زور الصفحة</a>
+        </div>
+        <div class="branch">
+          <div class="info">
+            <strong>يوتيرن الليبي</strong>
+            <p>المنطقة — يبعد 3.7 كم</p>
+          </div>
+          <a class="cta" href="يوتيرن الليبي(2.)html.html" style="padding:8px 10px;font-size:13px">زور الصفحة</a>
+        </div>
+        <div class="branch">
+          <div class="info">
+            <strong>يوتيرن حدة</strong>
+            <p>حدة — يبعد 5.2 كم</p>
+          </div>
+          <a class="cta" href="يوتيرن حدة.html" style="padding:8px 10px;font-size:13px">زور الصفحة</a>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a class="icon-box" href="https://www.facebook.com/share/17UJUJAKhr/" target="_blank" title="فيسبوك">
+          <i class="ri-facebook-fill"></i>
+        </a>
+        <a class="icon-box" href="https://www.instagram.com/uturn.ye?igsh=MWh1amo1MTVpa2tkYw==" target="_blank" title="انستغرام">
+          <i class="ri-instagram-line"></i>
+        </a>
+        <a class="icon-box" href="#" title="تيك توك">
+          <i class="ri-tiktok-fill"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="card" id="ssss" style="text-align:center">
+      <h3 style="margin:0 0 6px">تسجيل الدخول</h3>
+      <p style="margin:0 0 10px;color:var(--muted)">ادخل لحسابك لإدارة الطلبات بسهولة</p>
+      <a class="cta" href="تسجيل الدخول.html">تسجيل الدخول</a>
+    </div>
+
+    <div style="height:72px"></div>
+  </main>
+
+  <div class="whatsapp-fab" id="whatsFab" title="راسلنا عبر واتساب">
+    <i class="ri-whatsapp-line" style="font-size:28px;color:#fff;"></i>
+  </div>
+
+  <nav class="bottom-nav" id="bottomNav">
+    <div class="nav-item active" data-target="home">
+      <i class="ri-home-4-line"></i>
+      <span>الرئيسية</span>
+    </div>
+    <div class="nav-item" data-target="menu">
+      <i class="ri-restaurant-line"></i>
+      <span>القائمة</span>
+    </div>
+    <div class="nav-item" data-target="branches">
+      <i class="ri-map-pin-2-line"></i>
+      <span>الفروع</span>
+    </div>
+   <div class="nav-item" data-target="cardAbout">
+    <i class="ri-information-line"></i>
+    
+    <span>من نحن</span>
+  </div>
+    <div class="nav-item" data-target="account">
+      <i class="ri-user-line"></i>
+      <span>حسابي</span>
+    </div>
+  </nav>
+
+</div>
+
+<script>
+// شاشة البداية
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash');
+  setTimeout(() => {
+    splash.style.opacity='0';
+    splash.style.transform='scale(1.03)';
+    setTimeout(()=>{ splash.style.display='none'; },700);
+  },1600);
+});
+
+// نيفيجيشن
+const navItems = document.querySelectorAll('.nav-item');
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    navItems.forEach(i=>i.classList.remove('active'));
+    item.classList.add('active');
+    const target = item.getAttribute('data-target');
+    if(target==='menu') window.location.href='#dddd';
+    else if(target==='branches'){ const b=document.getElementById('branches'); if(b) b.scrollIntoView({behavior:'smooth', block:'center'});}
+    else if(target==='cardAbout') window.location.href='#cardAbout';
+     else if(target==='account') window.location.href='#ssss';
+    else window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+// أزرار سريعة
+document.getElementById('cardMenu').addEventListener('click', ()=>{ window.location.href='قائمة.html'; });
+document.getElementById('cardBranches').addEventListener('click', ()=>{ const b=document.getElementById('branches'); if(b) b.scrollIntoView({behavior:'smooth', block:'center'}); });
+
+// واتساب
+const whatsFab = document.getElementById('whatsFab');
+const myWhatsAppNumber = "967773516718";
+whatsFab.addEventListener('click', ()=>{
+  const defaultMessage = "مرحباً، أود إرسال اقتراح أو طلب من يوتيرن.";
+  const url = `https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(defaultMessage)}`;
+  window.open(url,"_blank");
+});
+
+// إشعار
+document.getElementById('notifBtn').addEventListener('click',()=>{ alert('لا توجد إشعارات جديدة الآن.'); });
+
+<!-- OneSignal SDK -->
+
+
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "YOUR_APP_ID", // ضع هنا App ID الخاص بك من OneSignal
+      notifyButton: {
+        enable: true, // يظهر زر طلب الإشعارات تلقائياً
+      },
+      welcomeNotification: {
+        "title": "مرحباً بك في يوتيرن!",
+        "message": "احصل على آخر العروض والإشعارات مباشرة.",
+      }
+    });
+  });
+// صفحة من نحن
+document.getElementById('cardAbout').addEventListener('click', () => {
+  window.location.href = 'من نحن.html';
+});
+
+
+
+
+</script>
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script src="sw.ja.js"></script>
 </body>
 </html>

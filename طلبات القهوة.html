@@ -1,535 +1,544 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مطاعم يوتيرن | احجز طلبك الآن</title>
+
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap');
 
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: #111;
-      color: #f5f5f5;
-      margin: 0;
-      padding: 0 0 80px; /* مساحة للفوتر */
-      line-height: 1.8;
-      animation: fadeIn 1.2s ease-in-out;
-      background-image: url('احنا.jpg');
+    body{
+      background-image: url('العائدين_الى_صنعاء.jpg');
       background-repeat: no-repeat;
-      background-attachment: fixed;
       background-size: 100% 100%;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(10px);
+      background-attachment: fixed;
+      
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    header {
-      background: #000;
+    /* الهيدر */
+header {
+      background: #222;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 10px 20px;
-      border-bottom: 2px solid #d4af37;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
       position: sticky;
       top: 0;
       z-index: 10;
     }
+    header h1 {font-size: 20px; margin: 0;}
+    nav {display: flex; gap: 15px;}
+    nav a {color: white; text-decoration: none; font-size: 16px;}
+    nav a:hover {color: #f5c542;}
+    .menu-btn {display: none; background: none; border: none; color: white; font-size: 26px; cursor: pointer;}
+    @media(max-width:768px){nav{display:none}.menu-btn{display:block}}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* القائمة المنبثقة */
+    .mobile-menu{background:rgba(255,255,255,0.9);width:100%;max-width:500px;border-radius:25px 25px 0 0;padding:20px;box-shadow:0 -5px 20px rgba(0,0,0,0.2);transform:translateY(100%);transition:transform .4s ease;position: sticky;;}
+    .mobile-menu.show{
+      transform:translateY(0);
+    position: sticky;
     }
+    .mobile-menu a{display:flex;align-items:center;font-size:18px;margin:12px 0;text-decoration:none;color:#222;}
+    .mobile-menu a span{margin-left:10px;}
+    .close-btn{background:none;border:none;color:#555;font-size:26px;position:absolute;right:25px;top:15px;cursor:pointer;}
 
-    .logo img {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      border: 2px solid #d4af37;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .logo img:hover {
-      transform: rotate(5deg) scale(1.05);
-      box-shadow: 0 0 10px #d4af37;
-    }
-
-    .logo h1 {
-      color: #d4af37;
-      font-size: 24px;
-      margin: 0;
-    }
-
-    nav a {
-      text-decoration: none;
-      background: #d4af37;
-      color: #000;
-      padding: 10px 25px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 17px;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      background: #b38f2f;
-      color: white;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 25px;
-    }
-
-    h1, h2, h3 {
-      color: #d4af37;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    label {
-      font-weight: bold;
-    }
-
-    select, input[type="number"], textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #d4af37;
-      background: #222;
-      color: white;
-      font-size: 16px;
-      box-sizing: border-box;
-      outline: none;
-    }
-
-    select:focus, input:focus, textarea:focus {
-      border-color: #ffcc00;
-      background: #1a1a1a;
-    }
-
-    .menu-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 10px 15px;
-      margin: 6px 0;
-      flex-wrap: wrap;
-      transition: 0.3s;
-    }
-
-    .menu-item:hover {
-      border-color: #d4af37;
-      background: #222;
-    }
-
-    .menu-item .price {
-      color: #d4af37;
-      font-weight: bold;
-      min-width: 80px;
-      text-align: left;
-    }
-
-    .quantity-control {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #222;
-      border-radius: 8px;
-      padding: 4px 10px;
-    }
-     nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 10px;
-        }
-
-        nav ul li a {
-            background-color: #444;
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover {
-            background-color: #ff6600;
-            transform: translateY(-2px);
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            color: #ff6600;
-        }
-
-        /* زر القائمة للجوال */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-
-    .quantity-control button {
-      background: #d4af37;
-      border: none;
-      color: #000;
-      font-size: 18px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .quantity-control button:hover {
-      background: #b38f2f;
-      color: white;
-    }
-
-    .quantity-control span {
-      font-size: 16px;
-      color: #fff;
-      width: 25px;
-      text-align: center;
-      display: inline-block;
-    }
-
-    /* ✅ قسم الحشوات والصوصات */
-    .fillings-section {
-      background: #1a1a1a;
-      border-radius: 12px;
-      border: 1px solid #333;
-      padding: 20px;
-      margin-top: 25px;
-      box-shadow: 0 0 10px rgba(212,175,55,0.1);
-    }
-
-    .checkbox-group {
+    /* الوجبات */
+    .menu-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      margin: 15px 0;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+/* القائمة المنبثقة من الأعلى إلى الأسفل */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: flex-start; /* العرض من الأعلى */
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 0 0 25px 25px;
+  padding: 25px 20px 40px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: 1100;
+}
+.menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.meal {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.meal:hover { transform: translateY(-5px); }
+
+.meal img {
+  width: 100%;
+  border-radius: 15px;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.details-btn {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: #f5b301;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.mobile-menu a:hover {
+  color: #f5b301;
+}
+
+.mobile-menu a span {
+  margin-left: 10px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 28px;
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  nav { display: none; }
+  .menu-btn { display: block; }
+}
+
+    .meal {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s;
     }
 
-    .checkbox-group label {
-      background: #222;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: 0.3s;
-      cursor: pointer;
-      color: #fff;
+    .meal:hover {
+      transform: translateY(-5px);
     }
 
-    .checkbox-group label:hover {
-      background: #333;
-      border-color: #d4af37;
-      color: #d4af37;
-    }
-
-    input[type="checkbox"] {
-      accent-color: #d4af37;
-      transform: scale(1.2);
-    }
-
-    /* ✅ الفوتر الجديد مع الأزرار والإجمالي */
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
+    .meal img {
       width: 100%;
-      background: #000;
-      border-top: 2px solid #d4af37;
-      color: #ffcc00;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px;
-      z-index: 100;
-      box-shadow: 0 -2px 8px rgba(212,175,55,0.2);
-      flex-wrap: wrap;
-      gap: 10px;
-        align-items: center;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      border-radius: 15px;
+      height: 180px;
+      object-fit: cover;
     }
 
-    .footer-total {
+    .meal h3 {
+      margin: 10px 0 5px;
+      color: #333;
+    }
+
+    .price {
+      color: #f5b301;
       font-weight: bold;
-      font-size: 20px;
+      font-size: 18px;
     }
 
-    .footer-btns {
+    .qty-control {
       display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 10px;
+      margin: 10px 0;
     }
 
-    .footer-btns button {
-      padding: 10px 18px;
+    .qty-control button {
+      background: #f5b301;
       border: none;
       border-radius: 8px;
-      font-weight: bold;
-      font-size: 15px;
+      color: white;
+      font-size: 18px;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+    }
+
+    .add-btn {
+      background: #222;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
       cursor: pointer;
       transition: 0.3s;
     }
 
-    .send-btn {
-      background: #d4af37;
-      color: #000;
+    .add-btn:hover {
+      background: #f5b301;
+    }
+   .meal {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s;
     }
 
-    .send-btn:hover {
-      background: #b38f2f;
+    .meal:hover {
+      transform: translateY(-5px);
+    }
+
+    .meal img {
+      width: 100%;
+      border-radius: 15px;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .meal h3 {
+      margin: 10px 0 5px;
+      color: #333;
+    }
+
+    .price {
+      color: #f5b301;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .qty-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .qty-control button {
+      background: #f5b301;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+    }
+
+    .add-btn {
+      background: #f5b301;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      margin: auto;
+    }
+
+    .add-btn:hover {
+      background: #222;
+      color: #f5b301;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .add-btn::before {
+      content: "🪑";
+      font-size: 18px;
+    }
+
+    .hero {
+      margin-top: 5rem;
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, rgba(240,194,123,0.6), rgba(75,18,72,0.6));
+      border-radius: 20px;
+      width: 90%;
+      margin-inline: auto;
       color: #fff;
     }
-
-    .reset-btn {
-      background: #444;
-      color: white;
-    }
-
-    .reset-btn:hover {
-      background: #666;
-    }
-
-    @media (max-width: 600px) {
-      footer {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-     /* ======= Responsive ======= */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                display: none;
-                width: 100%;
-                background-color: #333;
-                border-radius: 8px;
-                margin-top: 10px;
-            }
-
-            nav.active {
-                display: block;
-                animation: fadeIn 0.3s ease-in-out;
-            }
-
-            @keyframes fadeIn {
-                from {opacity: 0;}
-                to {opacity: 1;}
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid #444;
-            }
-
-            nav ul li a {
-                display: block;
-                width: 100%;
-                padding: 12px;
-            }
-
-            .imges img {
-                width: 70px;
-                height: 70px;
-            }
-        }
+.confirm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+.confirm-box {
+  background: white;
+  border-radius: 15px;
+  padding: 25px 30px;
+  text-align: center;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+  width: 280px;
+}
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.confirm-buttons button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.confirm-ok {background: #f5b301; color: white;}
+.confirm-cancel {background: #999; color: white;}
+header .imges {
+  order: 0; /* الشعار على اليمين */
+}
+/* ------------------ صندوق التفاصيل ------------------ */
+.details-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  border-radius: 15px 15px 0 0;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(-20px);
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+  z-index: 2;
+}
+.details-box.show {
+  max-height: 250px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.details-box strong {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+  color: #f5b301;
+}
+.details-box .close-details {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #f5b301;
+  border: none;
+  color: #222;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.details-btn {
+  background: #f5b301;
+  color: #222;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
   </style>
-</head>
 
-<body>
+  <!-- الهيدر -->
   <header>
-    <div class="logo">
-      <img src="Saved Pictures/ال يو.jpg" alt="شعار مطاعم يوتيرن">
-      <h1>مطاعم يوتيرن</h1>
-    </div>
-          <!-- زر القائمة للجوال -->
-            <button class="menu-toggle" id="menu-btn">☰</button>
 
-            <nav id="main-nav" class="trans">
-                <ul>
-    <li>  <a href="index.html">🏠 الصفحة الرئيسية</a></li>
-        <li> <a href="احجز طلبك الان.html">البرجر</a></li>
-     <li> <a href="طلبات التوست.html">التوست</a></li>
-     <li>  <a href="طلبات الحلا.html">الحلا</a></li>
-      <li> <a href="اللحم والدجاج المدخن.html">اللحم,الدجاج المدخن</a></li>
-      <li> <a href="الطلبات الجانبية.html">الطلبات الجانبية</a></li>
-     <li> <a href="طلبات الكومبير.html">كومبير</a></li>
-      </ul>
+    <nav>
+      <a href="index.html">🏠 الصفحة الرئيسية</a>
+      <a href="احجز طلبك الان.html">🍔 البرجر</a>
+      <a href="طلبات التوست.html">🍞 التوست</a>
+      <a href="طلبات الحلا.html">🍰 الحلا</a>
+      <a href="طلبات القهوة.html">☕ القهوة</a>
+      <a href="الطلبات الجانبية.html">🍟 الطلبات الجانبية</a>
+      <a href="طلبات الكومبير.html">🥔 الكومبير</a>
+ <button class="add-btn" onclick="addToTable(${i})"><a href="الطاولة.html">الطاولة</a></button>
     </nav>
-  </header>
-
-  <div class="container">
-    <h1>احجز طلبك الآن</h1>
-
-    <label for="branch">اختار الفرع القريب منك</label>
-    <select id="branch" required>
-      <option value="" disabled selected hidden>اختار الفرع القريب منك</option>
-      <option>يوتيرن - فرع الشلال</option>
-      <option>يوتيرن - فرع حدة</option>
-      <option>يوتيرن - فرع الليبي</option>
-    </select>
-
-    <label for="place">أين تحب أن تأكل البرجر</label>
-    <select id="place">
-      <option>قسم المحلي</option>
-      <option>قسم العوائل</option>
-      <option>قسم السفري</option>
-    </select>
-
-    <label for="payment">كيفية الدفع</label>
-    <select id="payment">
-      <option>كاش</option>
-      <option>شبكة</option>
-    </select>
-
-    <!-- بقية القائمة كما هي --> <h3>اختار  القهوة التي تحبها</h3>
-      <div class="menu-item" data-price="1700"> <label><input type="checkbox"> سبانش لاتيه</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1700 ري</span> </div> 
-     <div class="menu-item" data-price="1500"> <label><input type="checkbox"> افوكادو</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1500 ري</span> </div>
-      <div class="menu-item" data-price="1200"> <label><input type="checkbox"> V60</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1200 ري</span> </div> 
-      <div class="menu-item" data-price="1700"> <label><input type="checkbox"> قهوة باردة</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1700 ري</span> </div>
-       <div class="menu-item" data-price="1900"> <label><input type="checkbox"> قهوة  ساخنة</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1500 ري</span> </div> 
-       <div class="menu-item" data-price="2000"> <label><input type="checkbox"> امريكانو</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">2000 ري</span> </div>
-        <div class="menu-item" data-price="1100"> <label><input type="checkbox"> فربتشينو</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1100 ري</span> </div>
-         <div class="menu-item" data-price="1000"> <label><input type="checkbox"> ايس تي خوخ</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1000 ري</span> </div> 
-         <div class="menu-item" data-price="1300"> <label><input type="checkbox"> ايس تي بطيخ</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1300 ري</span> </div> 
-         <div class="menu-item" data-price="1400"> <label><input type="checkbox"> سكريم</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">1400 ري</span> </div> 
-         <div class="menu-item" data-price="300"> <label><input type="checkbox"> مشرب غازي</label> <div class="quantity-control"> <button onclick="changeQty(this, -1)">-</button> <span>0</span> <button onclick="changeQty(this, 1)">+</button> </div> <span class="price">300 ري</span> </div>
-
-    
-    <form id="orderForm">
-      <label>📝 ملاحظاتك</label>
-      <textarea placeholder="اكتب ملاحظاتك هنا..."></textarea>
-    </form>
-  </div>
-
-  <!-- ✅ الفوتر الجديد -->
-  <footer>
-    <div class="footer-total" id="total">إجمالي الطلب: 0 ري</div>
-    <div class="footer-btns">
-      <button class="send-btn" onclick="sendOrder()">📦 إرسال الطلب</button>
-      <button class="reset-btn" onclick="resetOrder()">🔄 إعادة تعيين</button>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div class="imges">
+      <img src="Saved Pictures/ال يو.jpg" alt="شعار المطعم" width="90" height="80">
     </div>
-  </footer>
+  </div>
+</header>
 
-  
- <script>
-  // زر القائمة للجوال
-  const menuBtn = document.getElementById("menu-btn");
-  const nav = document.getElementById("main-nav");
+  <!-- القائمة المنبثقة -->
+  <div class="mobile-menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="close-btn" onclick="closeMenu(event)">✕</button>
+      <a href="index.html"><span>🏠</span> الصفحة الرئيسية</a>
+      <a href="وجبات يوتيرن.html"><span>🍖</span> اللحم ,الدجاج المدخن</a>
+      <a href="طلبات التوست.html"><span>🍞</span> التوست</a>
+      <a href="طلبات الحلا.html"><span>🍰</span> الحلا</a>
+      <a href="احجز طلبك الان.html"><span> 🍔</span> البرجر</a>
+      <a href="الطلبات الجانبية.html"><span>🍟</span> الطلبات الجانبية</a>
+      <a href="طلبات الكومبير.html"><span>🥔</span> الكومبير</a>
+ <button class="add-btn" onclick="addToTable(${i})"><a href="الطاولة.html">الطاولة</a></button>
+    </div>
+  </div>
+<section class="hero">
+    <h1>مرحباً بكم في موقع مطاعم يوتيرن الالكتروني</h1>
+    <p>⛔ تنويه:جميع اصناف القهوة تتوفر في يوتيرن فرع حدة  </p>
+  </section>
+  <!-- قسم الوجبات -->
+  <main>
+    <h2 style="text-align:center; margin:20px;">☕ القهوة</h2>
+    <div class="menu-container" id="meals">
+      <!-- يتم إنشاء الوجبات عبر الجافاسكربت -->
+    </div>
+  </main>
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <h3>هل تريد إضافة هذه الوجبة إلى الطاولة؟</h3>
+    <div class="confirm-buttons">
+      <button class="confirm-ok" onclick="confirmAction(true)">موافق</button>
+      <button class="confirm-cancel" onclick="confirmAction(false)">إلغاء</button>
+    </div>
+  </div>
+</div>
 
-  menuBtn.addEventListener("click", () => {
-    nav.classList.toggle("active");
-  });
+  <!-- السكربت -->
+  <script>
+    const overlay = document.getElementById('menuOverlay');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-  // تعديل الكمية
-  function changeQty(btn, delta) {
-    const item = btn.closest('.menu-item');
-    const spanQty = item.querySelector('.quantity-control span');
-    const priceElem = item.querySelector('.price');
-    const basePrice = parseInt(item.getAttribute('data-price'));
+    function toggleMenu() {
+      overlay.style.display = 'flex';
+      setTimeout(() => mobileMenu.classList.add('show'), 10);
+    }
 
-    let qty = parseInt(spanQty.textContent);
-    qty = Math.max(0, qty + delta);
-    spanQty.textContent = qty;
-
-    const total = basePrice * qty;
-    priceElem.textContent = (qty > 0 ? total : basePrice) + " ري";
-
-    updateTotal();
-  }
-
-  // تحديث الإجمالي
-  function updateTotal() {
-    const items = document.querySelectorAll('.menu-item');
-    let sum = 0;
-    items.forEach(item => {
-      const qty = parseInt(item.querySelector('.quantity-control span').textContent);
-      const basePrice = parseInt(item.getAttribute('data-price'));
-      sum += qty * basePrice;
-    });
-    document.getElementById('total').textContent = "إجمالي الطلب: " + sum + " ري";
-  }
-
-  // ✅ دالة إرسال الطلب إلى واتساب
-  function sendOrder() {
-    const phoneNumber = "967773516718"; // ← رقمك هنا بدون + أو صفر
-    const branch = document.getElementById("branch").value;
-    const place = document.getElementById("place").value;
-    const payment = document.getElementById("payment").value;
-    const notes = document.querySelector("textarea").value;
-
-    let message = `🍔 *طلب جديد من مطاعم يوتيرن*\n`;
-    message += `📍 الفرع: ${branch}\n`;
-    message += `🪑 المكان: ${place}\n`;
-    message += `💳 طريقة الدفع: ${payment}\n\n`;
-    message += `🧾 *الطلبات:*\n`;
-
-    const items = document.querySelectorAll(".menu-item");
-    items.forEach(item => {
-      const name = item.querySelector("label").innerText.trim();
-      const qty = parseInt(item.querySelector(".quantity-control span").textContent);
-      const price = parseInt(item.getAttribute("data-price"));
-      if (qty > 0) {
-        message += `- ${name} × ${qty} = ${qty * price} ري\n`;
+    function closeMenu(e) {
+      if (e.target === overlay || e.target.classList.contains('close-btn')) {
+        mobileMenu.classList.remove('show');
+        setTimeout(() => overlay.style.display = 'none', 300);
       }
-    });
+    }
 
-    const total = document.getElementById("total").textContent;
-    message += `\n💰 ${total}\n`;
-    message += `📝 ملاحظات: ${notes || "لا توجد"}\n`;
-    message += `\n📅 تم الإرسال من صفحة الطلب عبر الموقع.`;
+    // قائمة الوجبات
+    const meals = [
+      {name:'اسبانش لاتية', price:1700, img:'بين ضغط المهام وكرف الدوام، _كوب قهوة مشترك ممكن يخفف الكثير😌__خذوا بريك وتعال أنت وز(J.jpg'},
+      {name:'V60', price:1500, img:'حياكم في يوتيرن.jpg'},
+      {name:'هوت تشوكلت', price:1000, img:'IMG-20251105-WA0009.jpg'},
+      {name:'ايس تس خوخ ', price:1500, img:'IMG-20251105-WA0010.jpg'},
+        {name:'ايس تي تفاح', price:1600, img:'حياكم في يوتيرن.jpg'},
+      {name:'ايس اسبانش', price:500, img:'IMG-20251105-WA0011.jpg'},
+      {name:'افوكادو', price:3000, img:'حياكم في يوتيرن.jpg'},
+        {name:'ميلك شيك', price:1400, img:'بين ضغط المهام وكرف الدوام، _كوب قهوة مشترك ممكن يخفف الكثير😌__خذوا بريك وتعال أنت وز(J.jpg'},
+      {name:'سبريسو ', price:1350, img:'IMG-20251105-WA0014.jpg'},
+      {name:'دبل اسبيرسو', price:4000, img:'IMG-20251105-WA0016.jpg'},
+        {name:'اضافة سيروب', price:300, img:'بين ضغط المهام وكرف الدوام، _كوب قهوة مشترك ممكن يخفف الكثير😌__خذوا بريك وتعال أنت وز(J.jpg'},
+      {name:'ماء يوتيرن', price:100, img:'Screenshot_20251102-181012_Video Player.jpg'},
+      {name:'مشروب غازي', price:300, img:'IMG-20250322-WA0001_1.jpg'}
+    ];
 
-    // تحديد الجهاز (جوال أو كمبيوتر)
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const baseUrl = isMobile
-      ? `https://wa.me/${phoneNumber}?text=`
-      : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=`;
+   
+const container = document.getElementById('meals');
 
-    const finalUrl = baseUrl + encodeURIComponent(message);
-    window.open(finalUrl, "_blank");
+meals.forEach((meal, i) => {
+  const card = document.createElement('div');
+  card.className = 'meal';
+  card.innerHTML = `
+      <button class="details-btn" onclick="toggleDetails(${i})">التفاصيل</button>
+    <div class="details-box" id="detailsBox${i}">
+      <button class="close-details" onclick="toggleDetails(${i})">✕</button>
+      <strong>المكونات:</strong><br>${meal.ingredients}
+    </div>
+    <img src="${meal.img}" alt="${meal.name}">
+    <h3>${meal.name}</h3>
+    <div class="price" id="price${i}">${meal.price} ر.ي</div>
+    <div class="qty-control">
+      <button onclick="changeQty(${i}, -1)">-</button>
+      <span id="qty${i}">1</span>
+      <button onclick="changeQty(${i}, 1)">+</button>
+    </div>
+    <button class="add-btn" onclick="addToCart(${i})">إضافة إلى الطاولة</button>
+  `;
+  container.appendChild(card);
+});
+// دالة التفاصيل
+function toggleDetails(i){
+  const box=document.getElementById('detailsBox'+i);
+  box.classList.toggle('show');
+}
+
+function changeQty(index, change) {
+  const qtyEl = document.getElementById('qty' + index);
+  let qty = parseInt(qtyEl.textContent) + change;
+  if (qty < 1) qty = 1;
+  qtyEl.textContent = qty;
+  const priceEl = document.getElementById('price' + index);
+  priceEl.textContent = (meals[index].price * qty) + " ر.ي";
+}
+
+function addToCart(index) {
+  const confirmAdd = confirm("هل تريد إضافة هذه الوجبة إلى الطاولة؟");
+  if (confirmAdd) {
+    const qty = parseInt(document.getElementById('qty' + index).textContent);
+    const item = {
+      name: meals[index].name,
+      price: meals[index].price,
+      quantity: qty,
+      image: meals[index].img
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const existing = cart.find(i => i.name === item.name);
+    if (existing) existing.quantity += qty;
+    else cart.push(item);
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+
+    alert("✅ تمت إضافة الوجبة إلى الطاولة بنجاح!");
+  } else {
+    alert("❌ تم إلغاء العملية.");
   }
-
-  // إعادة تعيين الطلب
-  function resetOrder() {
-    document.getElementById('orderForm').reset();
-    document.querySelectorAll('.quantity-control span').forEach(s => s.textContent = "0");
-    updateTotal();
-  }
+}
 </script>
+
 </body>
 </html>

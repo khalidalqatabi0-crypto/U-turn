@@ -22,30 +22,47 @@ body {
 }
 
 /* 🌟 شريط التنقل */
-nav {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.6);
-}
+   
+    nav {
+    
+    
+      background-color: rgba(0, 0, 0, 0.8);
+    
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
 
-nav a {
-  background-color: #adff2f;
-  color: #003366;
-  text-decoration: none;
-  border-radius: 12px;
-  padding: 14px 25px;
-  font-size: 28px;
-  transition: 0.3s;
-}
+     
+      text-align: center;
 
-nav a:hover {
-  background-color: #ff7f00;
-  color: white;
-  text-decoration: underline;
-}
+    }
 
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+  
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      background-color: #e63946;
+      padding: 10px 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+      font-weight: bold;
+      font-size: 18px;
+      position: sticky;
+    }
+
+    nav a:hover {
+      background-color: #457b9d;
+    }
 /* 🌟 العناوين */
 h1 {
   color: #000;
@@ -154,7 +171,9 @@ hr {
 
 <body>
   <nav>
-    <a href="يوتيرن حدة.html">العودة إلى صفحة حدة</a>
+    <ul>
+      <li><a href="يوتيرن حدة.html">العودة الى الصفحة الرئيسية</a></li>
+    </ul>
   </nav>
 
   <h1><marquee>🎈 أهلاً بكم في يوتيرن حدة | قسم الأطفال 🎨</marquee></h1>
@@ -198,7 +217,7 @@ hr {
   <div class="stidum">
     <div class="video">
       <video controls>
-        <source src="uturnvido/U-turn_Vid-01.mp4" type="video/mp4">
+        <source src="uturnvido/اطفال.mp4" type="video/mp4">
         متصفحك لا يدعم تشغيل الفيديو.
       </video>
     </div>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🪑 طاولتي  | مطاعم يوتيرن</title>
+
+<!-- Three.js + OrbitControls + CSS3DRenderer (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.156.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.156.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.156.0/examples/js/renderers/CSS3DRenderer.js"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+  :root{
+    --gold:#d4af37;
+    --gold-dark:#b38f2f;
+    --bg1:#070707;
+    --bg2:#111111;
+    --card:#121212;
+  }
+ html, body {
+  height: auto !important;
+  overflow-y: auto !important;  /* ✅ السماح بالتمرير */
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+ background:linear-gradient(180deg,var(--bg1),var(--bg2));
+ color:#fff;
+ overflow:hidden;
+}
+
+body {
+  display: block;
+  position: relative;
+
+}
+
+  header{
+    position:fixed;top:0;left:0;right:0;height:70px;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:rgba(0,0,0,0.25);backdrop-filter:blur(6px);border-bottom:2px solid rgba(212,175,55,0.08);z-index:30;
+  }
+  header .title{display:flex;align-items:center;gap:12px}
+  header h1{margin:0;color:var(--gold);font-size:20px}
+  header .controls{display:flex;gap:8px;align-items:center}
+  .btn{
+    background:var(--gold);color:#000;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;box-shadow:0 6px 12px rgba(211,160,45,0.15)
+  }
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
+  /* canvas container */
+  #stage{position:fixed;inset:70px 0 0 0;display:block}
+  /* small HUD (right bottom) */
+  .hud{
+    position:fixed;right:16px;bottom:16px;z-index:40;background:rgba(0,0,0,0.4);border-radius:10px;padding:12px;border:1px solid rgba(212,175,55,0.08);
+    color:#fff;backdrop-filter:blur(6px);
+  }
+  .hud .total{font-weight:700;color:var(--gold);font-size:18px;text-align:right}
+  .hud button{margin-top:8px;width:100%}
+  /* CSS card style (these are inserted into CSS3D objects) */
+  .card{
+    width:260px;height:120px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.6);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);color:#fff;display:flex;gap:12px;padding:12px;box-sizing:border-box;
+    transform-style:preserve-3d;font-size:14px;
+    direction:rtl;text-align:right;
+  }
+  .card .img{
+    width:92px;height:92px;border-radius:10px;background:linear-gradient(180deg,#222,#111);display:flex;align-items:center;justify-content:center;font-size:40px;color:rgba(255,255,255,0.12);flex:0 0 92px;
+  }
+  .card .body{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:4px 0}
+  .card .name{font-weight:700;color:var(--gold)}
+  .card .meta{font-size:13px;color:#ddd}
+  .card .qty{font-weight:800;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.03);align-self:flex-start}
+  /* responsive smaller cards on mobile */
+  @media (max-width:700px){
+    .card{width:220px;height:110px}
+  }
+  /* fallback pure-css table (hidden unless WebGL disabled) */
+  #fallbackTable{display:none;padding:20px;max-width:900px;margin:120px auto;color:#eee}
+  #fallbackTable table{width:100%;border-collapse:collapse;background:#0f0f0f;border-radius:8px;overflow:hidden}
+  #fallbackTable th, #fallbackTable td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:center}
+   label {
+      font-weight: bold;
+    }
+
+    select, input[type="number"], textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #d4af37;
+      background: #222;
+      color: white;
+      font-size: 16px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: #ffcc00;
+      background: #1a1a1a;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin: 6px 0;
+      flex-wrap: wrap;
+      transition: 0.3s;
+    }
+
+    .menu-item:hover {
+      border-color: #d4af37;
+      background: #222;
+    }
+     .menu-item .price {
+      color: #d4af37;
+      font-weight: bold;
+      min-width: 80px;
+      text-align: left;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #222;
+      border-radius: 8px;
+      padding: 4px 10px;
+    }
+
+    .quantity-control button {
+      background: #d4af37;
+      border: none;
+      color: #000;
+      font-size: 18px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .quantity-control button:hover {
+      background: #b38f2f;
+      color: white;
+    }
+
+    .quantity-control span {
+      font-size: 16px;
+      color: #fff;
+      width: 25px;
+      text-align: center;
+      display: inline-block;
+    }
+    /* ✅ حاوية الطاولة */
+#cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  max-height: 70vh; /* حتى لا تطغى على الشاشة */
+  overflow-y: auto; /* التمرير العمودي */
+  scroll-behavior: smooth; /* تمرير ناعم */
+}
+
+/* ✅ شكل شريط التمرير */
+#cardsContainer::-webkit-scrollbar {
+  width: 8px;
+}
+#cardsContainer::-webkit-scrollbar-thumb {
+  background-color: #e1b12c;
+  border-radius: 10px;
+}
+#cardsContainer::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title">
+    <img src="Saved Pictures/ال يو.jpg" alt="logo" style="width:46px;height:46px;border-radius:50%;border:2px solid var(--gold)">
+    <h1>🍽️ طاولتي — يوتيرن </h1>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="btnBack">🔙 العودة للقائمة</button>
+    <button class="btn ghost" id="btnClear">🗑️ إفراغ الطاولة</button>
+  </div>
+</header>
+<div class="container">
+    <h1>احجز طلبك الآن</h1>
+
+    <label for="branch">اختار الفرع القريب منك</label>
+    <select id="branch" required>
+      <option value="" disabled selected hidden>اختار الفرع القريب منك</option>
+      <option>يوتيرن - فرع الشلال</option>
+      <option>يوتيرن - فرع حدة</option>
+      <option>يوتيرن - فرع الليبي</option>
+    </select>
+
+    <label for="place">أين تحب أن تأكل البرجر</label>
+    <select id="place">
+      <option>قسم المحلي</option>
+      <option>قسم العوائل</option>
+      <option>قسم السفري</option>
+    </select>
+
+    <label for="payment">كيفية الدفع</label>
+    <select id="payment">
+      <option>كاش</option>
+      <option>شبكة</option>
+    </select>
+  <form id="orderForm">
+      <label>📝 ملاحظاتك</label>
+      <textarea placeholder="اكتب ملاحظاتك هنا..."></textarea>
+    </form>
+  
+
+<!-- 3D stage -->
+<div id="stage"></div>
+
+<!-- HUD يمين-أسفل: إجمالي وزر إرسال -->
+<div class="hud" id="hud">
+  <div class="total" id="hudTotal">الإجمالي: 0 ريال</div>
+  <button class="btn" id="btnSend">📲 إرسال عبر واتساب</button>
+</div>
+
+<!-- fallback table (in case CSS3D not supported) -->
+<div id="fallbackTable">
+  <h2 style="color:var(--gold);text-align:center">🪑 طاولتي</h2>
+  <div id="fallbackContent"></div>
+</div>
+</div>
+
+<script>
+/* ===========================
+   بيانات الطلبات من localStorage
+   =========================== */
+function readCart(){
+  try {
+    const raw = localStorage.getItem('cartItems');
+    if(!raw) return [];
+    return JSON.parse(raw);
+  } catch(e) {
+    console.warn('cart parse error', e);
+    return [];
+  }
+}
+
+function readCart() {
+  try {
+    const data = JSON.parse(localStorage.getItem('cartItems')) || [];
+    return data.map(item => ({
+      name: item.name,
+      image: item.image || '',
+      price: Number(item.price) || 0,
+      quantity: Number(item.quantity) || 0
+    }));
+  } catch (err) {
+    console.error("خطأ في قراءة الطاولة:", err);
+    return [];
+  }
+}
+
+// تحديث الإجمالي في الهيدر
+function updateHUDTotal() {
+  const items = readCart();
+  const total = items.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+  const hudTotal = document.getElementById('hudTotal');
+  if (hudTotal) {
+    hudTotal.textContent = `الإجمالي: ${total} ريال`;
+  }
+  document.title = `🪑 طاولتي — ${total} ريال`;
+}
+
+// إعادة التحديث عند أي تعديل في localStorage
+window.addEventListener('storage', e => {
+  if (e.key === 'cartItems') updateHUDTotal();
+});
+
+// استدعاء عند التحميل
+document.addEventListener('DOMContentLoaded', updateHUDTotal);
+
+/* ===========================
+   إعداد مشهد Three.js + CSS3DRenderer
+   =========================== */
+let scene, camera, renderer, cssRenderer, controls;
+const stage = document.getElementById('stage');
+
+function init3D(){
+  // المشهد والكاميرا
+  scene = new THREE.Scene();
+  const w = window.innerWidth, h = window.innerHeight - 70;
+  camera = new THREE.PerspectiveCamera(50, w/h, 0.1, 5000);
+  camera.position.set(0, 350, 650);
+
+  // WebGL renderer (سيظهر كخلفية خفيفة للعمق)
+  renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
+  renderer.setSize(w, h);
+  renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
+  renderer.domElement.style.position = 'absolute';
+  renderer.domElement.style.top = '70px';
+  stage.appendChild(renderer.domElement);
+
+  // CSS3D renderer لعرض عناصر HTML في الفضاء ثلاثي الأبعاد
+  cssRenderer = new THREE.CSS3DRenderer();
+  cssRenderer.setSize(w, h);
+  cssRenderer.domElement.style.position = 'absolute';
+  cssRenderer.domElement.style.top = '70px';
+  stage.appendChild(cssRenderer.domElement);
+
+  // ضوء خلفي بسيط (متاح للتأثيرات)
+  const light = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(light);
+
+  // طاولة (مجسم مستطيل بسيط لإحساس 3D)
+  const tableGeo = new THREE.BoxGeometry(900, 20, 500);
+  const tableMat = new THREE.MeshStandardMaterial({color:0x111111,metalness:0.6,roughness:0.4});
+  const table = new THREE.Mesh(tableGeo, tableMat);
+  table.position.set(0, -10, 0);
+  scene.add(table);
+
+  // حواف لامعة للطاولة
+  const edgeGeo = new THREE.BoxGeometry(900, 4, 500);
+  const edgeMat = new THREE.MeshStandardMaterial({color:0x2c2a2a,emissive:0x0b0b0b});
+  const edge = new THREE.Mesh(edgeGeo, edgeMat);
+  edge.position.set(0, -1, 0.5);
+  scene.add(edge);
+
+  // إعداد الكائنات القابلة للتدوير
+  controls = new THREE.OrbitControls(camera, cssRenderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.target.set(0, 0, 0);
+  controls.minDistance = 200;
+  controls.maxDistance = 1400;
+  controls.maxPolarAngle = Math.PI/2.2;
+
+  // تدرج خلفي خفيف عن طريق لوحة خلفية
+  const bgGeo = new THREE.PlaneGeometry(3000, 2000);
+  const bgMat = new THREE.MeshBasicMaterial({color:0x050505, side:THREE.BackSide});
+  const bg = new THREE.Mesh(bgGeo, bgMat);
+  bg.position.set(0, 400, -1200);
+  scene.add(bg);
+
+  window.addEventListener('resize', onResize);
+}
+
+/* ===========================
+   إنشاء بطاقات المنتجات كـ CSS3DObjects
+   =========================== */
+let cssObjects = [];
+function createCardsFromCart(){
+  // نزيل أي بطاقات قديمة
+  cssObjects.forEach(o => {
+    if(o.element && o.element.parentNode) o.element.parentNode.removeChild(o.element);
+    scene.remove(o);
+  });
+  cssObjects = [];
+
+  const items = readCart();
+  if(!items || items.length === 0){
+    showFallback(items);
+    return;
+  }
+
+  // ترتيب دائري على الطاولة
+  const radius = Math.max(220, items.length * 100);
+  const centerY = 40; // ارتفاع البطاقات عن الطاولة
+  const angleStep = (Math.PI*2) / Math.max(6, items.length); // مبدأياً نقسم الدائرة
+
+  items.forEach((it, idx) => {
+    const el = makeCardElement(it);
+    const obj = new THREE.CSS3DObject(el);
+    // موضع دائري حول مركز الطاولة
+    const a = idx * angleStep - Math.PI/2;
+    const x = Math.cos(a) * radius * 0.6;
+    const z = Math.sin(a) * radius * 0.6;
+    obj.position.set(x, centerY, z);
+    // يدور الوجه نحو المركز
+    obj.lookAt(new THREE.Vector3(0, centerY, 0));
+    scene.add(obj);
+    cssObjects.push(obj);
+  });
+
+  updateHUDTotal();
+}
+
+/* إنشاء عنصر HTML للبطاقة */
+function makeCardElement(item){
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.innerHTML = `
+    <div class="img">${ item.image ? `<img src="${item.image}" style="width:100%;height:100%;object-fit:cover;border-radius:8px">` : '🍔' }</div>
+    <div class="body">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+         <div style="text-align:right">
+           <div class="name">${item.name}</div>
+           <div class="meta">سعر الوحدة: ${item.price} ريال</div>
+         </div>
+         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+           <div class="qty">x ${item.quantity}</div>
+           <div class="meta">المجموع: ${item.price * item.quantity} ريال</div>
+         </div>
+      </div>
+    </div>
+  `;
+  // نضيف تفاعل: عند النقر نعرض خيارات حذف / تعديل
+  el.addEventListener('click', ()=> onCardClick(item.name));
+  return el;
+}
+
+/* عند النقر على بطاقة: نافذة بسيطة لحذف العنصر */
+function onCardClick(name){
+  if(!confirm(`هل تريد إزالة "${name}" من الطاولة؟`)) return;
+  let items = readCart();
+  items = items.filter(i => i.name !== name);
+  localStorage.setItem('cartItems', JSON.stringify(items));
+  createCardsFromCart();
+}
+
+/* ===========================
+   HUD و أزرار
+   =========================== */
+document.getElementById('btnBack').addEventListener('click', ()=> location.href = 'index.html');
+document.getElementById('btnClear').addEventListener('click', ()=> {
+  if(!confirm('هل تريد إفراغ الطاولة بالكامل؟')) return;
+  localStorage.removeItem('cartItems');
+  createCardsFromCart();
+});
+
+document.getElementById('btnSend').addEventListener('click', ()=> {
+  const items = readCart();
+  if(items.length === 0){ 
+    alert('⚠️ الطاولة فارغة'); 
+    return; 
+  }
+
+  const branch = document.getElementById('branch').value || "غير محدد";
+  const place = document.getElementById('place').value || "غير محدد";
+  const payment = document.getElementById('payment').value || "غير محدد";
+  const notes = document.querySelector('textarea').value.trim() || "لا توجد ملاحظات";
+
+  let msg = `🍔 *طلب جديد من طاولتي - مطاعم يوتيرن* %0A%0A`;
+  msg += `🏠 *الفرع:* ${branch}%0A`;
+  msg += `📍 *مكان الأكل:* ${place}%0A`;
+  msg += `💳 *طريقة الدفع:* ${payment}%0A%0A`;
+  msg += `🧾 *الطلبات:*%0A`;
+
+  items.forEach((i, index) => {
+    msg += `${index+1}. ${i.name} × ${i.quantity} = ${i.price * i.quantity} ريال%0A`;
+  });
+
+  const total = items.reduce((s,i)=> s + (i.price * i.quantity), 0);
+  msg += `%0A💰 *الإجمالي:* ${total} ريال%0A`;
+  msg += `%0A📝 *ملاحظات:* ${notes}%0A%0A`;
+  msg += `📅 *التاريخ:* ${new Date().toLocaleString('ar-EG')}`;
+
+  const phone = "967773516718";
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const base = isMobile 
+      ? `https://wa.me/${phone}?text=` 
+      : `https://web.whatsapp.com/send?phone=${phone}&text=`;
+
+  window.open(base + msg, '_blank');
+});
+
+/* تحديث إجمالي في HUD و العنوان */
+function updateHUDTotal(){
+  const items = readCart();
+  const total = items.reduce((s,i)=> s + (i.price * i.quantity), 0);
+  const hudTotal = document.getElementById('hudTotal');
+  hudTotal.textContent = `الإجمالي: ${total} ريال`;
+  document.title = `🪑 طاولتي — ${total} ريال`;
+  // fallback table
+  showFallback(items);
+}
+
+/* ===========================
+   Fallback عرض جدولي (بسيط) أسفل
+   =========================== */
+function showFallback(items){
+  const wrap = document.getElementById('fallbackTable');
+  const content = document.getElementById('fallbackContent');
+  if(!items || items.length === 0){
+    wrap.style.display = 'block';
+    content.innerHTML = '<p style="text-align:center;color:#bbb">لا توجد طلبات في الطاولة بعد</p>';
+    return;
+  }
+  wrap.style.display = 'block';
+  let html = '<table><thead><tr><th>المنتج</th><th>الكمية</th><th>سعر الوحدة</th><th>المجموع</th></tr></thead><tbody>';
+  items.forEach(i=>{
+    html += `<tr><td>${i.name}</td><td>${i.quantity}</td><td>${i.price}</td><td>${i.price * i.quantity}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  content.innerHTML = html;
+}
+
+/* ===========================
+   حلّ تغيير حجم ونِسَق العرض وAnimation loop
+   =========================== */
+function onResize(){
+  const w = window.innerWidth, h = window.innerHeight - 70;
+  camera.aspect = w/h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w,h);
+  cssRenderer.setSize(w,h);
+}
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+  cssRenderer.render(scene, camera);
+}
+
+/* تهيئة التشغيل */
+try {
+  init3D();
+  createCardsFromCart();
+  animate();
+} catch(e){
+  console.error('3D init error', e);
+  // لو تعذّر، أظهر الفallback فقط
+  document.getElementById('stage').style.display = 'none';
+  showFallback(readCart());
+}
+let items = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+items.forEach(item => {
+  console.log(item.name, item.quantity, item.price);
+});
+
+
+
+</script>
+</body>
+</html>

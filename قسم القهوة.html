@@ -42,27 +42,46 @@ h2 {
 }
 
 /* 🌟 شريط التنقل */
-nav {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 15px;
-  text-align: center;
-}
+   nav {
+    
+    
+      background-color: rgba(0, 0, 0, 0.8);
+    
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
 
-nav a {
-  color: #fff;
-  background-color: #228b22;
-  text-decoration: none;
-  padding: 12px 25px;
-  border-radius: 10px;
-  font-size: 24px;
-  transition: 0.3s;
-}
+     
+      text-align: center;
 
-nav a:hover {
-  background-color: #ffa500;
-  color: #000;
-}
+    }
 
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+  
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      background-color: #e63946;
+      padding: 10px 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+      font-weight: bold;
+      font-size: 18px;
+      position: sticky;
+    }
+
+    nav a:hover {
+      background-color: #457b9d;
+    }
 /* 🌟 الصور والفيديو */
 video, img {
   width: 100%;
