@@ -1,389 +1,536 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <link rel="stylesheet" href="تعديلات احجز طلبك الان.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>احجز طلبك الان</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قائمة البرجر | مطاعم يوتيرن</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  background-image: url('العائدين_الى_صنعاء.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(10px);
+  background-attachment: fixed;
+}
+
+header {
+      background: #222;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {font-size: 20px; margin: 0;}
+    nav {display: flex; gap: 15px;}
+    nav a {color: white; text-decoration: none; font-size: 16px;}
+    nav a:hover {color: #f5c542;}
+    .menu-btn {display: none; background: none; border: none; color: white; font-size: 26px; cursor: pointer;}
+    @media(max-width:768px){nav{display:none}.menu-btn{display:block}}
+
+    /* القائمة المنبثقة */
+    .mobile-menu{background:rgba(255,255,255,0.9);width:100%;max-width:500px;border-radius:25px 25px 0 0;padding:20px;box-shadow:0 -5px 20px rgba(0,0,0,0.2);transform:translateY(100%);transition:transform .4s ease;position: sticky;;}
+    .mobile-menu.show{
+      transform:translateY(0);
+    position: sticky;
+    }
+    .mobile-menu a{display:flex;align-items:center;font-size:18px;margin:12px 0;text-decoration:none;color:#222;}
+    .mobile-menu a span{margin-left:10px;}
+    .close-btn{background:none;border:none;color:#555;font-size:26px;position:absolute;right:25px;top:15px;cursor:pointer;}
+
+    /* الوجبات */
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+/* القائمة المنبثقة من الأعلى إلى الأسفل */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: flex-start; /* العرض من الأعلى */
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 0 0 25px 25px;
+  padding: 25px 20px 40px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: 1100;
+}
+.menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.meal {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.meal:hover { transform: translateY(-5px); }
+
+.meal img {
+  width: 100%;
+  border-radius: 15px;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.details-btn {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: #f5b301;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.details-btn:hover { background: #222; }
+
+.qty-control {
+  display: flex; justify-content: center; align-items: center;
+  gap: 10px; margin: 10px 0;
+}
+
+.qty-control button {
+  background: #f5b301; border: none; border-radius: 8px;
+  color: white; font-size: 18px; width: 35px; height: 35px; cursor: pointer;
+}
+
+.bread-options {
+  display: flex; justify-content: center; gap: 8px; margin: 10px 0;
+}
+
+.bread-option {
+  background: #eee; border: 2px solid #ccc; border-radius: 10px;
+  padding: 6px 10px; cursor: pointer; font-size: 15px; color: #333; transition: 0.3s;
+}
+
+.bread-option.active {
+  background: #f5b301; color: white; border-color: #f5b301;
+}
+
+.add-btn {
+  background: #222; color: white; border: none;
+  padding: 10px 15px; border-radius: 10px; cursor: pointer; transition: 0.3s;
+}
+
+.add-btn:hover { background: #f5b301; }
+
+/* ------------------ صندوق التفاصيل ------------------ */
+.details-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  border-radius: 15px 15px 0 0;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(-20px);
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+  z-index: 2;
+}
+.details-box.show {
+  max-height: 250px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.details-box strong {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+  color: #f5b301;
+}
+.details-box .close-details {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #f5b301;
+  border: none;
+  color: #222;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.details-btn {
+  background: #f5b301;
+  color: #222;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.meal.show-img img {
+  transform: translateY(-50px);
+}
+
+/* توافق الجوال */
+@media(max-width:768px) {
+  .details-box { font-size: 13px; }
+}
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  order: 1; /* الزر على اليسار */
+}
+
+header .imges {
+  order: 0; /* الشعار على اليمين */
+}
+
+@media(max-width:768px){
+  nav { display:none; }
+  .menu-btn { display:block; }
+}
+   .meal {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .meal:hover {
+      transform: translateY(-5px);
+    }
+
+    .meal img {
+      width: 100%;
+      border-radius: 15px;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .meal h3 {
+      margin: 10px 0 5px;
+      color: #333;
+    }
+
+    .price {
+      color: #f5b301;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .qty-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .qty-control button {
+      background: #f5b301;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+    }
+
+    .add-btn {
+      background: #f5b301;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      margin: auto;
+    }
+
+    .add-btn:hover {
+      background: #222;
+      color: #f5b301;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .add-btn::before {
+      content: "🪑";
+      font-size: 18px;
+    }
+
+    .hero {
+      margin-top: 5rem;
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, rgba(240,194,123,0.6), rgba(75,18,72,0.6));
+      border-radius: 20px;
+      width: 90%;
+      margin-inline: auto;
+      color: #fff;
+    }
+
+
+</style>
 </head>
-<body >
-  <header>
-  <nav>
-  <a href="الصفحة الرئيسية للمطعم.html" class="btn btn-dark">العودة الى الصفحة الرئيسية</a>
-  </nav>
-  </header>
-  <div class="container">
-    <label for="best-select"> اختار الفرع القريب منك</label>
-    <select name="best-choice" id="best-select" required>
+<body>
+<header>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+    <!-- زر الجوال على اليسار -->
+    <button class="menu-btn" id="menuBtn">☰</button>
 
-        <option value="" disabled selected hidden>اختار الفرع القريب منك</option>
+    <nav id="mainNav">
+      <a href="index.html">🏠 الصفحة الرئيسية</a>
+      <a href="وجبات يوتيرن.html">🍖 اللحم ,الدجاج المدخن</a>
+      <a href="طلبات التوست.html">🍞 التوست</a>
+      <a href="طلبات الحلا.html">🍰 الحلا</a>
+      <a href="طلبات القهوة.html">☕ القهوة</a>
+      <a href="الطلبات الجانبية.html">🍟 الطلبات الجانبية</a>
+      <a href="طلبات الكومبير.html">🥔 الكومبير</a>
+ <button class="add-btn" onclick="addToTable(${i})"><a href="الطاولة.html">الطاولة</a></button>
+    </nav>
 
-        <optgroup label="فرع الشلال">
-            <option value="1">يوتيرن_فرع الشلال</option>
-           
-        </optgroup>
-        <optgroup label="فرع حدة">
-            <option value="2">يوتيرن_فرع حدة</option>
-            
-                 
-        </optgroup>
-        <optgroup label="فرع الليبي">
-              <option value="3">يوتيرن_فرع الليبي</option>
-             
-        </optgroup>
-    </select>
-    <label for="best-select">اين تحب ان تاكل البرجر</label>
-    <select name="best-choice" id="best-select">
-        <option value="1">قسم المحلي</option>
-        <option value="2"> قسم العوائل</option>
-        <option value="3">قسم السفري</option>
-    </select>
-     
-    <label for="best-select">كيفية الدفع</label>
-    <select name="best-choice" id="best-select">
-        <option value="1">كاش</option>
-        <option value="2"> شبكة</option>
-       
-    </select>
-    <div class="column">
-    <div class="form-section">
-        <label for="quantity">ادخل العدد الذي تريد</label>
-        <input type="number" id="quantity" name="quantity" min="1" placeholder="0">
-<label for=""name>طاولة</label>
-<textarea name="table" id="table"></textarea>
-
-  <label >نوع الطلب</label>
-  <select name="best-choice" id="best-select">
-    <div class="menu-item">
-  <option value="1">وجبة مكتملة _لحم</option>
-  <span class="price">5200ري</span>
+    <!-- الشعار على اليمين -->
+    <div class="imges">
+      <img src="Saved Pictures/ال يو.jpg" alt="شعار المطعم" width="90" height="80">
+    </div>
   </div>
-  <div class="menu-item">
-  <option value="1">وجبة مكتملة _دجاج</option>
-  <span class="price">4200ري</span>
+</header>
+
+
+
+<div class="mobile-menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" onclick="closeMenu(event)">✕</button>
+    <a href="index.html">🏠 الصفحة الرئيسية</a>
+    <a href="وجبات يوتيرن.html">🍖 اللحم ,الدجاج المدخن</a>
+    <a href="طلبات التوست.html">🍞 التوست</a>
+    <a href="طلبات الحلا.html">🍰 الحلا</a>
+    <a href="طلبات القهوة.html">☕ القهوة</a>
+    <a href="الطلبات الجانبية.html">🍟 الطلبات الجانبية</a>
+    <a href="طلبات الكومبير.html">🥔 الكومبير</a>
+ <button class="add-btn" onclick="addToTable(${i})"><a href="الطاولة.html">الطاولة</a></button>
   </div>
-  <div class="menu-item">
-   <option value="1">وجبة عادية_لحم</option>
-   <span class="price">3900ري</span>
-   </div>
-   <div class="menu-item">
-   <option value="1">وجبة عادية_دجاج</option>
-   <span class="price">2800ري</span>
-   </div>
-
-</select>
- <label >اختار نوع الخبز</label>
-<img src="Saved Pictures/IMG-20250829-WA0001.jpg" width="100" height="90" alt="">
-       
-        <div class="checkbox-group">
-          
-            <label ><input type="checkbox" name="bread" value="white">خبز ابيض</label>
-              <label ><input type="checkbox" name="bread" value="brown">خبز اسمر</label>
-                <label ><input type="checkbox" name="bread" value="mixed">خبز  سبونجي(بريوش)</label>
-
-        </div>
-        <img src="Saved Pictures/ما نلومك لو الأكل من يوتيرن بس هل تشارك أكلك أو لا؟👀___مطاعم_يوتيرن__u_turn_restaurants(JPG).jpg" width="100" height="90" alt="">
-<label >اختار الشريحة مع البرجر</label>
-   
-   <div class="menu-item">
-    <label ><input type="checkbox" name="slice" value="beef">لحم</label>
-  <span class="price">3900ري</span>
-</div>
-            
-              <div class="menu-item">
-                  <label ><input type="checkbox" name="slice" value="checken">دجاج</label>
-  <span class="price">2900ري</span>
-</div>
-               
-                <div class="menu-item">
-                   <label ><input type="checkbox" name="slice" value="fish">سمك</label>
-  <span class="price">3300ري</span>
-</div>
-               
-                <div class="menu-item">
-                   <label ><input type="checkbox" name="slice" value="vaggien">نباتي</label>
-  <span class="price">1800ري</span>
-</div>
-                 
-                <img src="Saved Pictures/اختار حشوات البرجر.jpg" width="100" height="90" alt="">
-                <h3>اختار الحشوات الخاصة ب البرجر</h3>
-                <div class="checkbox-group">
-                    <label > <input type="checkbox" name="sausese" value="sausese">خس</label>
-                      <label > <input type="checkbox" name="sausese" value="sausese">جرجير</label>
-                        <label > <input type="checkbox" name="sausese" value="sausese">كينوا</label>
-                          <label > <input type="checkbox" name="sausese" value="sausese">خيار</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">طماط</label>
-                              <label > <input type="checkbox" name="sausese" value="sausese">بصل</label>
-                                <label > <input type="checkbox" name="sausese" value="sausese">خيار مخلل</label>
-                                  <label > <input type="checkbox" name="sausese" value="sausese">زيتون</label>
-                                    <label > <input type="checkbox" name="sausese" value="sausese">هلابينو</label>
-                </div>
-                <div class="checkbox-group">
-                  
-                      <label > <input type="checkbox" name="sausese" value="sausese">ذرة</label>
-                        <label > <input type="checkbox" name="sausese" value="sausese">تبولة</label>
-                          <label > <input type="checkbox" name="sausese" value="sausese">بصل محمص</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">بصل مكرمل</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">بزاليا</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">بنجر متبل</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">بطاطس</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">لانشون</label>
-                            
-                            
-            
-                </div>
-                  <h1 align="center">الصوصات الذي تريد مع البرجر</h1>
-                 <div class="checkbox-group">
-                
-                   <label > <input type="checkbox" name="sausese" value="sausese">رانش</label>
-                        <label > <input type="checkbox" name="sausese" value="sausese">كوكتيل</label>
-                          <label > <input type="checkbox" name="sausese" value="sausese">باربيكيو</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">ريزو</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">باربيكيو توت</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">سابيسي معتدل</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">سابيسي حار جدا</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">يوتيرن</label>
-                             <label > <input type="checkbox" name="sausese" value="sausese">حالي حامض</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">تشيكانا</label>
-                            <label > <input type="checkbox" name="sausese" value="sausese">مايتشوب</label>
-                            
-
-                 </div>
-            </div>
-            </div>
-            <div class="column">
-            
-                <h3>طلبات جانبية</h3>
-                    <img src="Saved Pictures/اجننحة_الدجاج.jpg" width="100" height="90" alt="">
-                   <h5>اجنحة الدجاج</h5>
-                <div class="checkbox-grid">
-                 <div class="menu-item">
-                   <label > <input type="checkbox" name="sausese" value="sausese">16 اجنحة</label>
-  <span class="price">2200ري</span>
-</div>
-               
-                <div class="menu-item">
-                  
-                        <label > <input type="checkbox" name="sausese" value="sausese">20 اجنحة</label>
-  <span class="price">2700ري</span>
-</div>
-                        <div class="menu-item">
-                          
-                          <label > <input type="checkbox" name="sausese" value="sausese">24اجنحة</label>
-                         
-  <span class="price">3200ري</span>
-</div> 
-<div class="menu-item">
-   <label > <input type="checkbox" name="sausese" value="sausese">28 اجنحة</label>
-  <span class="price">3700ري</span>
-</div>
-                           
-                            <div class="menu-item">
-                               <label > <input type="checkbox" name="sausese" value="sausese">32 اجنحة</label>
-  <span class="price">4200ري</span>
-</div>
-                           
-                            <div class="menu-item">
-                              <label > <input type="checkbox" name="sausese" value="sausese">36 اجنحة</label>
-  <span class="price">4600ري</span>
-</div>
-                            
-                            <div class="menu-item">
-                               <label > <input type="checkbox" name="sausese" value="sausese">40 اجنحة</label>
-  <span class="price">5200</span>
-</div>
-                           
-                            <div class="menu-item">
-                               <label > <input type="checkbox" name="sausese" value="sausese">44 اجنحة</label>
-  <span class="price">5600ري</span>
-</div>
-                           
-                          
-              </div>
-              <hr width="1000" color="black">
-<img src="Saved Pictures/الشربه.jpg" width="100" height="90" alt="">
-              <h5>شوربة يوتيرن</h5>
-              <div class="checkbox-grid">
-                <div class="menu-item">
-                  <label > <input type="checkbox" name="sausese" value="sausese">شربة دجاج</label>
-  <span class="price">1000ري</span>
-</div>
-               
-                 <div class="menu-item">
-                    <label > <input type="checkbox" name="sausese" value="sausese">شربة بطاط</label>
-  <span class="price">1000ري</span>
-</div>
-                  
-              </div>
-<hr width="1000" color="black">
-              <img src="Saved Pictures/سلطه يوترن.jpg" width="100" height="90" alt="">
-              <h5>سلطة يوتيرن</h5>
-              <div class="checkbox-grid">
-                <div class="menu-item">
-                  <label > <input type="checkbox" name="sausese" value="sausese">سلطة كبير</label>
-  <span class="price">1200ري</span>
-</div>
-                 
-                 <div class="menu-item">
-                   <label > <input type="checkbox" name="sausese" value="sausese">سلطة صغير</label>
-  <span class="price">1900ري</span>
-</div>
-                       
-
-              </div>
-              <hr width="1000" color="black">
-              <img src="Saved Pictures/ِ}.jpg" width="100" height="90" alt="">
-              <h5>كومبير يوتيرن</h5>
-              <div class="checkbox-grid">
-               
-                 <div class="menu-item">
-                    <label > <input type="checkbox" name="sausese" value="sausese">كومبير لحم</label>
-  <span class="price">3500ري</span>
-</div>
-                        
-                        <div class="menu-item">
-                          <label > <input type="checkbox" name="sausese" value="sausese">كومبير دجاج</label>
-  <span class="price">3200ري</span>
-</div>
-                        
-                         <div class="menu-item">
-                           <label > <input type="checkbox" name="sausese" value="sausese">كومبير خضار</label>
-  <span class="price">2200ري</span>
-</div>
-                       
-                        <div class="menu-item">
-                           <label > <input type="checkbox" name="sausese" value="sausese">كومبير عادي</label>
-  <span class="price">2200ري</span>
-</div>
-              </div>
-              <hr width="1000" color="black">
-              <img src="Saved Pictures/التشيز كيك.jpg" width="100" height="90"  alt="">
-              <h5>انواع ال تشيز كيك</h5>
-              <div class="checkbox-group">
-                <div class="menu-item">
-                     <label > <input type="checkbox" name="sausese" value="sausese">تشيز كيك كراميل</label>
-  <span class="price">2000ري</span>
-</div>
-              
-                 <div class="menu-item">
-                  <label > <input type="checkbox" name="sausese" value="sausese">تشيز كيك ليمون</label>
-  <span class="price">2000ري</span>
-</div>
-                        
-                        <div class="menu-item">
-                           <label > <input type="checkbox" name="sausese" value="sausese">تشيز كيك ترند دبي</label>
-  <span class="price">2000ري</span>
-</div>
-                        
-                         <div class="menu-item">
-                            <label > <input type="checkbox" name="sausese" value="sausese">تشيز كيك بيستاشيو</label>
-  <span class="price">2000ري</span>
-</div>
-                      
-                    
-              </div>
-               <hr width="1000" color="black">
-              <img src="Saved Pictures/تقول الدراسات إن اللي يبدأ صباحه بروح حلوة_ ويحرص على فطوره يكمل يومه بسعادة🤎_ ملاحظة(.jpg" width="100 " height="90" alt="">
-              <h5>توستات يوتيرن</h5>
-              <div class="checkbox-grid">
-               
-                 <div class="menu-item">
-                   <label ><input type="checkbox" name="toste" value="toste">توست تشيز بو(الشبس)</label>
-  <span class="price">1100ري</span>
-</div>
-              
-                 <div class="menu-item">
-                     <label > <input type="checkbox" name="sausese" value="sausese">توست اومليت</label>
-  <span class="price">1100ري</span>
-</div>
-                      
-                        <div class="menu-item">
-                            <label > <input type="checkbox" name="sausese" value="sausese">توست اجبان</label>
-  <span class="price">1200ري</span>
-</div>
-                        
-                         <div class="menu-item">
-                           <label > <input type="checkbox" name="sausese" value="sausese">توست تونة فاخرة</label>
-  <span class="price">1500ري</span>
-</div>
-                        
-                        <div class="menu-item">
-                          <label > <input type="checkbox" name="sausese" value="sausese">توست مورتدلا دجاج</label>
-  <span class="price">1800ري</span>
-</div>
-                        
-                        <div class="menu-item">
-                          <label > <input type="checkbox" name="sausese" value="sausese">توست  مورتدلا لحم</label>
-  <span class="price">1900ري</span>
-</div>
-                       
-                        <div class="menu-item">
-                           <label > <input type="checkbox" name="sausese" value="sausese">توست مونزرلا</label>
-  <span class="price">2000ري</span>
 </div>
 
-              </div>
-            </div>
-            <div class="column">
-<h3>طلبات القهوة</h3>
-<img src="Saved Pictures/بين ضغط المهام وكرف الدوام، _كوب قهوة مشترك ممكن يخفف الكثير😌__خذوا بريك وتعال أنت وز(J.jpg" width="100" height="90" alt="">
+<main>
+  <h2 style="text-align:center; margin:20px;"> 🍔 البرجر</h2>
+  <div class="menu-container" id="meals"></div>
+</main>
 
-              <div class="checkbox-grid"  >
-                <div class="menu-section">
-                  <h2>قهوة يوتيرن</h2>
-                  <div class="menu-item">
-                 <label > <input type="checkbox" name="sausese" value="sausese">اسبانش لاتية</label>
-                 <span class="price">1700 ري</span>
-                 </div>
-                 <div class="menu-item">
-                         <label > <input type="checkbox" name="sausese" value="sausese">ايس كوفية</label>
-                         <button onclick="updateQuantity('spavish',1)">+</button>
-                         <span class="price">1500ري</span>
-                         </div>
-                         <div class="menu-item">
-                         <label > <input type="checkbox" name="sausese" value="sausese">V60</label>
-                         <span class="price">1600ري</span>
-</div>
-<div class="menu-item">
-                         <label > <input type="checkbox" name="sausese" value="sausese">امريكانو</label>
-                         <span class="price">1300ري</span>
-                         </div>
-                         <div class="menu-item">
-                         <label > <input type="checkbox" name="sausese" value="sausese">ايس تي خوخ</label>
-                          <span class="price">1300ري</span>
-</div>
-<div class="menu-item">
-                         <label > <input type="checkbox" name="sausese" value="sausese">ايس تي بطيخ</label>
-                         <span class="price">1300ري</span>
-</div>
 
-                        
-                         <div class="menu-item">
-                         <label > <input type="checkbox" name="sausese" value="sausese">قهوة عربي</label>
-                             <span class="price">1300ري</span>
-                             </div>
+<script>
+const meals = [
+  { name: 'وجبة برجر لحم مكتملة', price: 5200, img: 'الرفيق قبل الطريق.jpg', ingredients: 'خبز برجر,شريحة اللحم125غ,شريحة الجبن, حشوات البرجر,بطاط الودجز|فرايز,مشروب غازي' },
+    { name: 'وجبة برجر لحم مفرد', price: 3800, img: 'الرفيق قبل الطريق.jpg', ingredients:  'خبز البرجر,شريحة اللحم125غ,شريحة الجبن,حشوات البرجر' },
 
-                         
-                          <div class="menu-item">
-                         <label > <input type="checkbox" name="sausese" value="sausese">قهوة يمني</label>
-                           <span class="price">1300ري</span>
+  { name: 'وجبة برجر دجاج مكتملة', price: 4400, img: 'IMG-20251105-WA0004.jpg', ingredients:'خبز برجر,شريحة الدجاج125غ,شريحة الجبن, حشوات البرجر,بطاط الودجز|فرايز,مشروب غازي' },
+   { name: 'وجبة برجر دجاج مفردة', price: 2900, img: 'IMG-20251105-WA0004.jpg', ingredients: 'خبز البرجر,شريحة الدجاج125غ,شريحة الجبن,حشوات البرجر' },
 
-                     
-              </div>
-            </div>
-            </div>
-   </div>
-   <form >
-    <div style="direction: rtl; font-family:'cairo',sans-serif;">
-<label for="comments" style="color: white; font-size: 18px;">اكتب التعديلات هنا </label>
- <textarea name="message" id="message" rows="10" cols="30"></textarea> 
- </div>
- 
-  <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
-    <input type="submit" name="sende" value="ارسال" style="padding: 20px 20px; background-color:#45a049; color: white; border: none;border-radius: 5px; cursor: pointer; "/>
+  { name: 'وجبة برجر سمك مكتملة', price: 4600, img: 'IMG-20251105-WA0005.jpg', ingredients:'خبز برجر,شريحة السمك125غ,شريحة الجبن, حشوات البرجر,بطاط الودجز|فرايز,مشروب غازي' },
+   { name: 'وجبة برجر سمك مفردة', price: 3300, img: 'IMG-20251105-WA0005.jpg', ingredients:'خبز البرجر,شريحة السمك125غ,شريحة الجبن,حشوات البرجر' },
 
-    <input type="reset" name="clear" value="اعادة تعيين"style="padding: 20px 20px; background-color:  #f44336; color: white; border: none;border-radius: 5px; cursor: pointer; "/>
-  </div>
-     </form>
+  { name: 'وجبة برجر نباتي مكتملة', price: 3000, img: 'البرجر النباتي.jpg', ingredients:'خبز برجر,شريحة النباتي125غ,شريحة الجبن, حشوات البرجر,بطاط الودجز|فرايز,مشروب غازي' },
+  { name: 'وجبة برجر نباتي مفردة', price: 1800, img: 'البرجر النباتي.jpg', ingredients: 'خبز البرجر,شريحة النباتي125غ,شريحة الجبن,حشوات البرجر' },
+
+  { name: 'وجبة برجر لحم مكتملة صغير', price: 3000, img: 'الرفيق قبل الطريق.jpg', ingredients: 'خبز برجر,شريحة اللحم125غ,شريحة الجبن, حشوات البرجر,بطاط الودجز|فرايز,مشروب غازي' },
+    { name: 'وجبة برجر لحم مفرد صغير', price: 2100, img: 'الرفيق قبل الطريق.jpg', ingredients:  'خبز البرجر,شريحة اللحم125غ,شريحة الجبن,حشوات البرجر' },
+
+   { name: 'وجبة برجر دجاج مكتملة صغير', price: 2500, img: 'IMG-20251105-WA0004.jpg', ingredients:'خبز برجر,شريحة الدجاج125غ,شريحة الجبن, حشوات البرجر,بطاط الودجز|فرايز,مشروب غازي' },
+   { name: 'وجبة برجر دجاج مفردة صغير', price: 1700, img: 'IMG-20251105-WA0004.jpg', ingredients: 'خبز البرجر,شريحة الدجاج125غ,شريحة الجبن,حشوات البرجر' },
+
+
+   { name: 'شريحة لحم اضافية', price: 1800, img: 'IMG-20251105-WA0017.jpg',ingredients:'شريحة لحم 125غ' },
+    { name: 'شريحة دجاج', price: 1500, img: 'IMG-20251105-WA0013.jpg', ingredients:'شريحة دجاج 125غ'},
+     { name: 'بطاط الفرايز', price: 1300, img: 'جوع بعد العصر🧐،_اللي للآن محد لقى له مبرر_🙂__لكن يوتيرن لقى له حل__سيطر على الوضع واطل(.jpg',ingredients:'بطاط الفرايز مع صوصتين اضافية' },
+      { name: 'بطاط الودجز', price: 1300, img: 'الودجز.jpg',ingredients:'بطاط الودجز مع صوصتين اضافية' },
+      { name: 'مشروب غازي', price: 300, img: 'IMG-20251108-WA0018.jpg' },
+        { name: 'سان توب', price: 300, img: 'IMG-20251108-WA0021.jpg' },
+    { name: 'ماء يوتيرن', price: 100, img: 'IMG-20251108-WA0020.jpg' }
+];
+ // دالة التفاصيل
+function toggleDetails(i){
+  const box=document.getElementById('detailsBox'+i);
+  box.classList.toggle('show');
+}
+const container = document.getElementById('meals');
+const breadChoices = {};
+
+meals.forEach((meal, i) => {
+  const card = document.createElement('div');
+  card.className = 'meal';
+
+  let breadHTML = '';
+  if (meal.name.includes('برجر')) {
+    breadHTML = `
+      <div class="bread-options" id="bread${i}">
+        <div class="bread-option" onclick="selectBread(${i}, 'أبيض', this)">أبيض</div>
+        <div class="bread-option" onclick="selectBread(${i}, 'أسمر', this)">أسمر</div>
+        <div class="bread-option" onclick="selectBread(${i}, 'بريوش', this)">بريوش</div>
+      </div>`;
+  }
+
+  card.innerHTML = `
+  <button class="details-btn" onclick="toggleDetails(${i})">التفاصيل</button>
+    <div class="details-box" id="detailsBox${i}">
+      <button class="close-details" onclick="toggleDetails(${i})">✕</button>
+      <strong>المكونات:</strong><br>${meal.ingredients}
+    </div>
+    <img src="${meal.img}" alt="${meal.name}">
+    <h3>${meal.name}</h3>
+    <div class="price" id="price${i}">${meal.price} ر.ي</div>
+    ${breadHTML}
+    <div class="qty-control">
+      <button onclick="changeQty(${i}, -1)">-</button>
+      <span id="qty${i}">1</span>
+      <button onclick="changeQty(${i}, 1)">+</button>
+    </div>
+    <button class="add-btn" onclick="addToTable(${i})">إضافة إلى الطاولة</button>
+  `;
+  container.appendChild(card);
+});
+
+function selectBread(index, type, element) {
+  const all = document.querySelectorAll(`#bread${index} .bread-option`);
+  all.forEach(b => b.classList.remove('active'));
+  element.classList.add('active');
+  breadChoices[index] = type;
+}
+
+function toggleDetails(index) {
+  const card = document.getElementsByClassName('meal')[index];
+  let detailsBox = document.getElementById('detailsBox' + index);
+
+  if (!detailsBox) {
+    const box = document.createElement('div');
+    box.className = 'details-box';
+    box.id = 'detailsBox' + index;
+    box.innerHTML = `
+      <button class="close-details" onclick="closeDetails(${index})">✕</button>
+      <strong>المكونات:</strong><br>${meals[index].ingredients}
+    `;
+    card.appendChild(box);
+    setTimeout(() => { box.classList.add('show'); card.classList.add('show-img'); }, 10);
+  } else {
+    detailsBox.classList.toggle('show');
+    card.classList.toggle('show-img');
+  }
+}
+
+function closeDetails(index) {
+  const card = document.getElementsByClassName('meal')[index];
+  const detailsBox = document.getElementById('detailsBox' + index);
+  if (detailsBox) {
+    detailsBox.classList.remove('show');
+    card.classList.remove('show-img');
+  }
+}
+
+function changeQty(index, change) {
+  const qtyEl = document.getElementById('qty' + index);
+  let qty = parseInt(qtyEl.textContent) + change;
+  if (qty < 1) qty = 1;
+  qtyEl.textContent = qty;
+  document.getElementById('price' + index).textContent = (meals[index].price * qty) + " ر.ي";
+}
+
+function addToTable(index) {
+  const confirmAdd = confirm("هل تريد إضافة هذه الوجبة إلى الطاولة؟");
+  if (!confirmAdd) return; // إذا ضغط على "إلغاء" يتوقف الإجراء
+
+  const qty = parseInt(document.getElementById('qty' + index).textContent);
+  const bread = breadChoices[index] || "بدون اختيار";
+  const item = { 
+    name: meals[index].name + " - الخبز: " + bread, 
+    price: meals[index].price, 
+    quantity: qty, 
+    image: meals[index].img 
+  };
+
+  let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const existing = cart.find(i => i.name === item.name);
+  if (existing) existing.quantity += qty;
+  else cart.push(item);
+  localStorage.setItem('cartItems', JSON.stringify(cart));
+
+  alert("تمت الإضافة إلى الطاولة 🪑");
+}
+
+/* ------------------ قائمة الجوال ------------------ */
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuBtn.addEventListener('click', () => {
+  menuOverlay.style.display = 'flex';
+  setTimeout(()=> mobileMenu.classList.add('show'), 10);
+});
+
+function closeMenu(e) {
+  if (e.target === menuOverlay || e.target.classList.contains('close-btn')) {
+    mobileMenu.classList.remove('show');
+    setTimeout(()=> menuOverlay.style.display='none', 300);
+  }
+}
+
+</script>
+
 </body>
 </html>
