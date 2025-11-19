@@ -1,268 +1,160 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>يوتيرن حدة | قسم القهوة</title>
-
+    <link rel="stylesheet" href="تعديلات القهوة.css">
+   
 <style>
-/* 🌟 الإعدادات العامة */
-body {
-  background-image: url('حياكم في يوتيرن.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  background-color: #f0f8ff;
-  backdrop-filter: blur(10px) brightness(1.1);
-  margin: 0;
-  padding: 0;
-  color: #000;
-  font-family: "Cairo", sans-serif;
+   
+     body{
+        background-image: url('حياكم في يوتيرن.jpg' );
+    opacity: var(0.50);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: aliceblue;
+    background-size: 100% 100%;
+    backdrop-filter: blur(10px);
+     }
+
+
+h1{
+
+    font-size: 50px;
+    background-color: black;
+    color: aliceblue;
 }
 
-/* 🌟 العناوين */
-h1 {
-  font-size: 45px;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: aliceblue;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  margin: 40px 10px 20px;
-}
-
-h2 {
-  color: black;
-  background-color: azure;
-  font-size: 35px;
-  padding: 10px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-/* 🌟 شريط التنقل */
-   nav {
+.changing{  
     
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
     
-      background-color: rgba(0, 0, 0, 0.8);
-    
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+}
+.video{
+    flex: 2;
+}
+.text{
+    flex: 2;
+}
+video{
+     width: 500px;
+    height: 400px;
+    border-radius: 30px;
+    border-style: double;
+    border-color: beige;
+    flex-direction: row-reverse;
 
-     
-      text-align: center;
+}
+.connect{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.imga{
+    flex: 1;
 
-    }
+}
+.text1{
+flex: 1;
+}
+h2{
 
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-  
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      background-color: #e63946;
-      padding: 10px 20px;
-      border-radius: 10px;
-      transition: 0.3s;
-      font-weight: bold;
-      font-size: 18px;
-      position: sticky;
-    }
-
-    nav a:hover {
-      background-color: #457b9d;
-    }
-/* 🌟 الصور والفيديو */
-video, img {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  border-radius: 25px;
-  border: 4px double beige;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    color:black;
+    background-color: azure;
 }
 
-/* 🌟 توزيع العناصر */
-.changing, .connect {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 25px;
-  flex-wrap: wrap;
-  margin: 30px;
-}
 
-/* 🌟 النصوص */
-.text, .text1 {
-  flex: 1;
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 15px;
-  padding: 20px;
-  font-size: 28px;
-  line-height: 1.8;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-}
 
-/* 🌟 تحسينات الجوال */
-@media (max-width: 992px) {
-  h1 {
-    font-size: 38px;
-  }
 
-  h2 {
-    font-size: 30px;
-  }
-
-  nav a {
-    font-size: 22px;
-    padding: 10px 20px;
-  }
-
-  .text, .text1 {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 600px) {
-  body {
-    font-size: 22px;
-  }
-
-  h1 {
-    font-size: 32px;
-    padding: 15px;
-  }
-
-  h2 {
-    font-size: 26px;
-  }
-
-  nav a {
-    font-size: 20px;
-    display: inline-block;
-    margin: 5px 0;
-  }
-
-  .changing, .connect {
-    flex-direction: column;
-    align-items: center;
-    margin: 15px;
-  }
-
-  .text, .text1 {
-    font-size: 22px;
-    padding: 15px;
-  }
-
-  video, img {
-    max-width: 100%;
-    height: auto;
-  }
-}
 </style>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>يوتيرن حدة \قسم القهوة</title>
 </head>
-
 <body>
+    <nav class="bottom">
+    <a href="يوتيرن حدة.html" class="btn btn-dark">العودة الى الصحة الاولى</a>
+   </nav>
 
-<nav>
-  <a href="يوتيرن حدة.html">العودة إلى الصفحة الأولى</a>
-</nav>
+    <img src="Saved Pictures/U-turn Coffee_250901_130810.jpg" width="1500" height="200" alt="صورة الشعار لقسم القهوة">
+     <h1 align="center"> فديوهات يوتيرن فرع حدة</h1>
+     <h2 align="center"> <marquee> انواع البن اليمني </marquee></h2>
 
-<img src="Saved Pictures/U-turn Coffee_250901_130810.jpg" width="1500" height="200" alt="صورة الشعار لقسم القهوة">
+     <div class=" changing">
+        <div class="video">
+     <video controls role="alert" >
+        <source src="uturnvido/vid-2.mp4"> 
+     </video>
+    </div>
+    
+    <div class="text">
 
-<h1>🎥 فيديوهات يوتيرن فرع حدة</h1>
-<h2><marquee>☕ أنواع البن اليمني الأصيل ☕</marquee></h2>
-
-<div class="changing">
-  <div class="video">
-    <video controls>
-      <source src="uturnvido/vid-2.mp4" type="video/mp4">
-      متصفحك لا يدعم تشغيل الفيديو.
-    </video>
-  </div>
-  <div class="text">
-    <ol>
-      <li>بن وادي بناء</li>
-      <li>بن حرازي</li>
-      <li>بن وصابي</li>
-      <li>بن لهوائي</li>
-      <li>بن تعزي</li>
-      <li>بن يافعي</li>
+    <ol dir="rtl">
+        <li >بن وادي بناء</li>
+        <li>بن حرازي</li>
+        <li>بن وصابي</li>
+         <li> بن لاهوائي</li>
+          <li>بن تعزي</li>
+           <li>بن يافعي</li>
     </ol>
-  </div>
-</div>
+    </div>
+    </div>
 
-<h1>كوب واحد لا يكفي ☕</h1>
-<div class="changing">
-  <div class="video">
-    <video controls muted>
-      <source src="uturnvido/كوب واحد لا يكفي1.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="text">
-    <ul>
-      <li>مشروب ال يو مكس</li>
-      <li>مشروب آيس بانش لانيه</li>
-      <li>مشروب مع الآيس كريم</li>
-      <li>مشروب أمريكانو</li>
-      <li>مشروب آيس تي خوخ</li>
+     <h1 align="center"> فيديو ب عنوان كوب واحد لا يكفي</h1>
+     <div class=" changing"> 
+        <div class="video">
+     <video controls muted  >
+         <source src="uturnvido/كوب واحد لا يكفي1.mp4">
+     </video>
+     </div>
+<div class="text">
+    <ul dir="rtl">
+        <li>مشروب ال يو مكس</li><li>مشروب ايس بانش لانيه</li><li>مشروب مع الايش كريم</li><li> مشروب امريكانو</li><li> مشروب ايش تي خوخ</li>
     </ul>
-  </div>
-</div>
 
-<h1>☀️ فطور الصباح مع قهوة يوتيرن</h1>
+</div>
+</div>
 <div class="changing">
-  <div class="video">
-    <video controls muted>
-      <source src="uturnvido/استكانة القهوة وفطور الصبح  يلزم لهم صوت يمني أصيل عشان تكمل حلاوتهم🤎_زورنا واطرب جو(M.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="text">
-    <ul>
-      <li>الفطور لا يكتمل إلا مع شاي أو قهوة من يوتيرن. على صوت الطرب اليمني تبدأ صباحك بابتسامة ☕🎶</li>
-    </ul>
-  </div>
+    <div class="video">
+        <video controls muted>
+            <source src="uturnvido/استكانة القهوة وفطور الصبح  يلزم لهم صوت يمني أصيل عشان تكمل حلاوتهم🤎_زورنا واطرب جو(M.mp4">
+        </video>
+    </div>
+    <div class="text">
+        <ul dir="rtl">
+            <li>اكيد الفطور ما يكمل الا ب شاي او قهوة ,فالذالك اخذ معك قهوة او شاي من يوتيرن يعدل مزاجك ,وعلى صوت الطرب اليمني تنعش صباجك</li>
+        </ul>
+    </div>
+</div>
+<h1 align="center"> مشروب الرازينا ,الزبيب المنقع</h1>
+<div class="changing"> 
+    <div class="video">
+        <video controls>
+            <source src="uturnvido/الزبيب دخل ملعبنا 🔥__رايزينا_ مشروب يوتيرني جديد _طبيعي 100_ وسكره منه وفيه😌__بانتظارك (.mp4">
+        </video>
+         </div>
+        <div class="text">
+            <ul dir="rtl">
+                <li>مشروب الرازينا الطبيعي 100% ,الزبيب المنقع  , اللذيذ ,يتم تقديمه مع اللحم او الداجاج المدخن لكي يعطي نكهة اخر لل الاكل </li>
+            </ul>
+            
+       
+    </div>
 </div>
 
-<h1>🍇 مشروب الرازينا (الزبيب المنقع)</h1>
-<div class="changing">
-  <div class="video">
-    <video controls>
-      <source src="uturnvido/الزبيب دخل ملعبنا 🔥__رايزينا_ مشروب يوتيرني جديد _طبيعي 100_ وسكره منه وفيه😌__بانتظارك (.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="text">
-    <ul>
-      <li>مشروب الرازينا الطبيعي 100% من الزبيب المنقوع، يُقدّم مع اللحم أو الدجاج المدخن لإضافة نكهة فريدة.</li>
-    </ul>
-  </div>
-</div>
-
-<h1>☕ قهوة يوتيرن اللذيذة</h1>
+<h1 align="center"> قهوة يوتيرن اللذيذه</h1>
 <div class="connect">
-  <div class="imga">
-    <img src="Saved Pictures/قهوة يوترن.jpg" alt="قهوة يوترن">
-  </div>
-  <div class="text1">
-    <ul>
-      <li>قهوة يمنية أصلية</li>
-      <li>قهوة حجازية</li>
-      <li>قهوة أمريكية</li>
-      <li>قهوة برازيلية</li>
-      <li>قهوة حبشية</li>
-    </ul>
-  </div>
+<div class="imga">
+    <img src="Saved Pictures/قهوة يوترن.jpg" width="600" height="400" alt="لايوجد صورة">
+ 
 </div>
-
+<div class="text1">
+<ul dir="rtl">
+    <li>قهوة يمنيه اصليه</li><li>قهوة حجازيه</li><li>قهوة امريكيه</li><li>قهوة برازيليه</li><li>قهوة حبشيه</li>
+</ul>
+</div>
+</div>
 </body>
 </html>

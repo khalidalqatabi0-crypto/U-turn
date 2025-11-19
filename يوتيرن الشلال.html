@@ -1,296 +1,198 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>يوتيرن الشلال</title>
-  <style>
-    body {
-      background-image: url('الرفيق قبل الطريق.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: aliceblue;
-      font-size: 20px;
-      backdrop-filter: blur(5px);
-      font-family: "Cairo", sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+    <link rel="stylesheet" href="تعديلات.css">
+    <style>
+body{
+background-image: url('الرفيق قبل الطريق.jpg');
+background-size: 100% 100%;
+background-repeat: no-repeat;
+background-attachment: fixed;
+color: aliceblue;
+font-size: 20px;
+backdrop-filter: blur(5px);
+
+}
+.container{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-direction: row-reverse;
+}
+.video{
+    flex: 1;
+}
+.text{
+    flex: 1;
+}
+video{
+
+    width: 500px;
+    height: 400px;
+    border-radius: 30px;
+    border-style: double;
+    border-color: beige;
+
+
+}
+h1{
+    font-size: 50px;
+    color: aliceblue;
+    background-color: black;
+
+}
+ nav ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding-top: 5px;
+}
+ nav a{
+    color:red;
+    text-decoration: none;
+     transition: 0.3s;
    
-    nav {
+     font-size: 20px;
+}
+ nav a:hover{
+    text-decoration: underline;
+    color: blue;
+
+}
     
-    
-      background-color: rgba(0, 0, 0, 0.8);
-    
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
 
-     
-      text-align: center;
 
+
+.btn{
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+       
+       
+       background-color: white;
+        color: black;
+        text-decoration: none;
+        border-radius: 10px;
+    }
+    .btn:hover{
+        background: #e65c00;
     }
 
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-  
-    }
 
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      background-color: #e63946;
-      padding: 10px 20px;
-      border-radius: 10px;
-      transition: 0.3s;
-      font-weight: bold;
-      font-size: 18px;
-      position: sticky;
-    }
 
-    nav a:hover {
-      background-color: #457b9d;
-    }
 
-    h1 {
-      background-color: rgba(0, 0, 0, 0.8);
-      text-align: center;
-      color: white;
-      padding: 10px;
-      font-size: 35px;
-      margin-top: 0;
-    }
-
-    h2, h3, h4 {
-      color: #ffebcd;
-      text-align: center;
-    }
-
-    p, li {
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    img {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      display: block;
-      margin: 10px auto;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.3);
-    }
-
-    video {
-      width: 100%;
-      max-width: 500px;
-      height: auto;
-      border-radius: 15px;
-      border: 2px solid #f5deb3;
-      display: block;
-      margin: 10px auto;
-    }
-
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      padding: 15px;
-    }
-
-    .video, .text {
-      flex: 1 1 300px;
-      text-align: center;
-    }
-
-    ol, ul {
-      list-style-type: square;
-      padding-right: 25px;
-    }
-
-    hr {
-      width: 90%;
-      border: 1px solid #fff;
-      margin: 30px auto;
-      opacity: 0.6;
-    }
-
-    .btn {
-      background: #fff;
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #ff6f00;
-      color: white;
-    }
-
-    /* ✅ استجابة للجوال */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 26px;
-      }
-
-      h2, h3, h4 {
-        font-size: 20px;
-      }
-
-      p, li {
-        font-size: 16px;
-      }
-
-      nav a {
-        font-size: 16px;
-        padding: 8px 15px;
-      }
-    }
-
-  </style>
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>يوترن الشلال</title>
 </head>
-<body>
+<body"" dir="rtl" >
+    <nav class="trans">
+        <ul>
+<link rel="stylesheet" href="https:// cdn.jsdlivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+ <li> <a href="الصفحة الرئيسية للمطعم.html"class="btn btn-dark" >العودة الى الصفحة الرئيسية</a></li>
+</ul>
+</nav>
+    <img src="Saved Pictures/U-turn Burger_250901_130718.jpg" width="1500" height="200" alt="لايوجد صورة"  >
 
-  <nav>
-    <ul>
-      <li><a href="index.html">العودة الى الصفحة الرئيسية</a></li>
-    </ul>
-  </nav>
+    <h1><marquee  bgcolor="black" textcolor="white"><font color="white" size="20">اهلا بكم في يوترن فرع الشلال</font></marquee></h1>
+   <p> <h2 align="center">  جوله تعريفيه عن الفرع الاول</p>          </h2>
+   <hr size="10" width="85%" color="black" noshade></p>
+     <img src="Saved Pictures/IMG-20250829-WA0002.jpg" width="550" height="400" alt="لايوجد صورة">
+     <h3 align="center" bgcolor="silver" ><font size="50" >فرع يوتيرن الشلال الاصبحي</font> </h3>
+    <ul type="square" align="center" bgcolor="brown"><font size="30">  <li>الموقع  :مول الاصبحي المقالح مول الشلال الدور الرابع</li></font></ul>
 
 
-  <img src="Saved Pictures/U-turn Burger_250901_130718.jpg" alt="يوتيرن الشلال">
 
-  <h1><marquee>أهلاً بكم في يوترن فرع الشلال</marquee></h1>
 
-  <h2>جولة تعريفية عن الفرع الأول</h2>
-  <hr>
+  
+    <h1 align="center">  انواع البرجرات المقدمة في يوترن الشلال</h1>
+      <p><img src="Saved Pictures/البرجر النباتي.jpg"  width="600" height="400" alt="لايوجد صورة"></p>
+    <ol><font size="5"> <li>برجر اللحم</li><li>برجر الدجاج</li><li>برجر السمك</li><li>برجر نباتي</li></font></ol>
+    <hr width="100%" height="100" color="black">
 
-  <img src="Saved Pictures/IMG-20250829-WA0002.jpg" alt="فرع الشلال">
 
-  <h3>فرع يوتيرن الشلال الأصبحي</h3>
-  <ul>
-    <li>الموقع: مول الأصبحي - المقالح مول الشلال - الدور الرابع</li>
-  </ul>
 
-  <hr>
 
-  <h1>أنواع البرجرات المقدمة في يوترن الشلال</h1>
-  <img src="Saved Pictures/البرجر النباتي.jpg" alt="البرجر النباتي">
-  <ol>
-    <li>برجر اللحم</li>
-    <li>برجر الدجاج</li>
-    <li>برجر السمك</li>
-    <li>برجر نباتي</li>
-  </ol>
+    
+   <h1 align="center"> انواع الشبس المقدم:</h1>
+   <img src="Saved Pictures/الودجز.jpg" width="600" height="400" alt="لايوجد صورة">
+    <ul><li>بطاط الودجز مع صوصتين</li><li>بطاط الفرايز مع صوصتين</li></ul>
+     <hr width="100%" height="100" color="black">
 
-  <hr>
+  <h1 align="center">بطاط الكومبير</h1>
+    <p> <img src="Saved Pictures/الكومبير.jpg" width="600" height="400" alt="لايوجد صورة"></p>
+    
+     <h2><font size="20">انواع الكومبير:</font>  </h2>
+     <ul><font size="5"><li>كومبير ب اللحم</li><li>كومبير ب الدجاج</li><li>كومبير ب خضار</li></ul>
 
-  <h1>أنواع الشبس المقدم</h1>
-  <img src="Saved Pictures/الودجز.jpg" alt="الودجز">
-  <ul>
-    <li>بطاط الودجز مع صوصتين</li>
-    <li>بطاط الفرايز مع صوصتين</li>
-  </ul>
+       <h1 align="center"> شوربه يوترن</h1>
+     <img src="Saved Pictures/الشربه.jpg"  width="600" height="400" alt="لايوجد صورة">
+   
+     <p> انواع شوربة يوتيرن</p>
+     <ul><li>شوربة دجاج </li><li>شوربةبطاط</li></ul>
+     <h1 align="center"> فديوهات يوتيرن الشلال</h1>
 
-  <hr>
-
-  <h1>بطاط الكومبير</h1>
-  <img src="Saved Pictures/الكومبير.jpg" alt="الكومبير">
-  <h2>أنواع الكومبير:</h2>
-  <ul>
-    <li>كومبير باللحم</li>
-    <li>كومبير بالدجاج</li>
-    <li>كومبير بالخضار</li>
-  </ul>
-
-  <hr>
-
-  <h1>شوربة يوترن</h1>
-  <img src="Saved Pictures/الشربه.jpg" alt="الشوربة">
-  <p>أنواع شوربة يوتيرن:</p>
-  <ul>
-    <li>شوربة دجاج</li>
-    <li>شوربة بطاط</li>
-  </ul>
-
-  <hr>
-
-  <h1>فيديوهات يوترن الشلال</h1>
-
-  <div class="container">
-    <div class="video">
-      <video controls>
+     <div class="container">
+        <div class="video">
+     <video controls role="alert" >
         <source src="uturnvido/vid-2.mp4">
-      </video>
-    </div>
-    <div class="text">
-      <h2>أنواع البن اليمني</h2>
-      <ol>
-        <li>بن وادي بناء</li>
+        
+     </video>
+     </div>
+<div class="text">
+    <h2 dir="rtl" >  انواع البن اليمني</h2>
+    <ol dir="rtl">
+        <li >بن وادي بناء</li>
         <li>بن حرازي</li>
         <li>بن وصابي</li>
-        <li>بن لاهوائي</li>
-        <li>بن تعزي</li>
-        <li>بن يافعي</li>
-      </ol>
-    </div>
-  </div>
+         <li> بن لاهوائي</li>
+          <li>بن تعزي</li>
+           <li>بن يافعي</li>
+    </ol>
 
-  <hr>
+</div>
+</div>
 
-  <h1>الفيديو التالي</h1>
-  <div class="container">
-    <div class="video">
-      <video controls muted>
-        <source src="uturnvido/يومك حلو؟_أو بنخلي أجنحة الدجاج تدّخل في الموضوع😌___مطاعم_يوتيرن__u_turn_restaurants(MP4).mp4">
-      </video>
-    </div>
-    <div class="text">
-      <h3>أنواع أجنحة الدجاج</h3>
-      <ol>
-        <li>أجنحة مغطاة بالسمسم</li>
-        <li>أجنحة متبلة ببهارات خاصة</li>
-        <li>أجنحة بدون إضافات</li>
-      </ol>
-    </div>
-  </div>
+     </ul>
+     <h1 align="center"> الفديو التالي</h1>
+     <div class="container">
+        <div class="video">
+     <video controls muted>
 
-  <hr>
-
-  <h1>فيديو البرجر</h1>
-  <div class="container">
-    <div class="video">
-      <video controls>
-        <source src="uturnvido/هذا الصوت اللي يستاهل نقول عنه _صوت يجيب العافية🔥🤎__متى آخر مرة زرتنا وسمعته؟___مطاعم(.mp4">
-      </video>
-    </div>
-    <div class="text">
-      <h4>تحضير البرجر</h4>
-      <ol>
-        <li>خبز البرجر</li>
-        <li>الصوص الذي يتم اختياره</li>
-        <li>الخس</li>
-        <li>الطماط</li>
-        <li>البصل</li>
-        <li>الخيار المخلل</li>
-        <li>الذرة المتبلة</li>
-        <li>البنجر</li>
-        <li>البصل المحمص</li>
-      </ol>
-    </div>
-  </div>
-
+<source src="uturnvido/يومك حلو؟_أو بنخلي أجنحة الدجاج تدّخل في الموضوع😌___مطاعم_يوتيرن__u_turn_restaurants(MP4).mp4">
+     </video>
+     </div>
+     <div class="text"> 
+        <h3> انواع الاجنجه الدجاج</h3>
+        <ol>
+            <li> اجنحه مغرق ب السمسم</li>
+                  <li> اجنحه متبله ب بهارات الاجنحه الخاصه</li>
+                        <li>اجنحه صافيه بدون اي اضافات</li>
+        </ol>
+     </div>
+     </div>
+     <h1 align="center">فيديو البرجر</h1>
+     <div class="container" >
+        <div class="video">
+            <video controls role="cell">
+                <source src="uturnvido/هذا الصوت اللي يستاهل نقول عنه _صوت يجيب العافية🔥🤎__متى آخر مرة زرتنا وسمعته؟___مطاعم(.mp4">
+            </video>
+        </div>
+        <div class="text">
+<h4> تحضير البرجر</h4>
+<ol>
+    <li>خبز البرجر</li>
+     <li>الصوص الذي يتم اختياره</li>
+      <li>خس</li>
+       <li>طماط</li>
+        <li>بصل </li>
+         <li>خيار مخلل</li>
+          <li> ذره متبلة</li>
+           <li>بنجر</li>
+            <li>بصل محمص</li>
+</ol>
+        </div>
+     </div>
 </body>
 </html>
