@@ -278,6 +278,24 @@
     header .imges {
   order: 0; /* الشعار على اليمين */
 }
+/* توافق الجوال */
+@media(max-width:768px) {
+  .details-box { font-size: 13px; }
+}
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  order: 1; /* الزر على اليسار */
+}
+
+header .imges {
+  order: 0; /* الشعار على اليمين */
+}
+
   </style>
 </head>
 <body>
@@ -293,7 +311,7 @@
       <a href="طلبات القهوة.html">☕ القهوة</a>
       <a href="الطلبات الجانبية.html">🍟 الجانبية</a>
       <a href="وجبات يوتيرن.html">🍖 المدخن</a>
-    <button class="add-btn" onclick="addToTable(${i})"><a href="الطاولة.html">الطاولة</a></button>
+    <button class="add-btn" onclick="addToTable({i})"><a href="الطاولة.html">الطاولة</a></button>
     </nav>
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
    <div class="imges">
@@ -312,7 +330,7 @@
       <a href="طلبات القهوة.html">☕ القهوة</a>
       <a href="الطلبات الجانبية.html">🍟 الجانبية</a>
       <a href="احجز طلبك الان.html">🍔 البرجر</a>
-   <a class="add-btn" onclick="addToTable($ i)" href="الطاولة.html">الطاولة</a>
+   <a class="add-btn" onclick="addToTable({i})" href="الطاولة.html">الطاولة</a>
     </div>
   </div>
 

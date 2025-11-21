@@ -139,6 +139,23 @@ header .imges {
   top: 15px;
   cursor: pointer;
 }
+/* توافق الجوال */
+@media(max-width:768px) {
+  .details-box { font-size: 13px; }
+}
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  order: 1; /* الزر على اليسار */
+}
+
+header .imges {
+  order: 0; /* الشعار على اليمين */
+}
 
 @media (max-width: 768px) {
   nav { display: none; }
@@ -399,7 +416,7 @@ header .imges {
       <a href="طلبات القهوة.html">☕ القهوة</a>
       <a href="وجبات يوتيرن.html">🍖 اللحم ,الدجاج المدخن</a>
       <a href="طلبات الكومبير.html">🥔 الكومبير</a>
- <button class="add-btn" onclick="addToTable(${i})"><a href="الطاولة.html">الطاولة</a></button>
+ <a class="add-btn" onclick="addToTable({i})"href="الطاولة.html">الطاولة</a>
     </nav>
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
@@ -420,7 +437,7 @@ header .imges {
       <a href="طلبات القهوة.html"><span>☕</span> القهوة</a>
       <a href="الطلبات الجانبية.html"><span>🍔</span> البرجر</a>
       <a href="طلبات الكومبير.html"><span>🥔</span> الكومبير</a>
- <button class="add-btn" onclick="addToTable(${i})"><a href="الطاولة.html">الطاولة</a></button>
+ <a class="add-btn" onclick="addToTable({i})"href="الطاولة.html">الطاولة</a>
     </div>
   </div>
  
