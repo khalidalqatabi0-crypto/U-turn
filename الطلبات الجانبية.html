@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قائمة البرجر | مطاعم يوتيرن</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap');
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  background-image: url('العائدين_الى_صنعاء.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(10px);
+  background-attachment: fixed;
+}
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap');
-
-    body{
-      background-image: url('قبل يوم جامعي محفوف بالكوزات_ تسلّح من يوتيرن بألذ فطور_ وتأكد أنك قدها 🤎💪___مطاعم_يو(J.jpg');
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      backdrop-filter: blur(10px);
-      background-attachment: fixed;
-      
-    }
-    /* الهيدر */
 header {
       background: #222;
       color: white;
@@ -41,16 +45,7 @@ header {
     .mobile-menu a{display:flex;align-items:center;font-size:18px;margin:12px 0;text-decoration:none;color:#222;}
     .mobile-menu a span{margin-left:10px;}
     .close-btn{background:none;border:none;color:#555;font-size:26px;position:absolute;right:25px;top:15px;cursor:pointer;}
-.meal img {
-  width: 100%;
-  border-radius: 15px;
-  height: 180px;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-header .imges {
-  order: 0; /* الشعار على اليمين */
-}
+
     /* الوجبات */
     .menu-container {
       display: grid;
@@ -125,20 +120,101 @@ header .imges {
   transition: 0.3s;
 }
 
-.mobile-menu a span {
-  margin-left: 10px;
+.details-btn:hover { background: #222; }
+
+.qty-control {
+  display: flex; justify-content: center; align-items: center;
+  gap: 10px; margin: 10px 0;
 }
 
-.close-btn {
-  background: none;
-  border: none;
-  color: #555;
-  font-size: 28px;
-  position: absolute;
-  right: 25px;
-  top: 15px;
-  cursor: pointer;
+.qty-control button {
+  background: #f5b301; border: none; border-radius: 8px;
+  color: white; font-size: 18px; width: 35px; height: 35px; cursor: pointer;
 }
+
+.bread-options {
+  display: flex; justify-content: center; gap: 8px; margin: 10px 0;
+}
+
+.bread-option {
+  background: #eee; border: 2px solid #ccc; border-radius: 10px;
+  padding: 6px 10px; cursor: pointer; font-size: 15px; color: #333; transition: 0.3s;
+}
+
+.bread-option.active {
+  background: #f5b301; color: white; border-color: #f5b301;
+}
+
+.add-btn {
+  background: #222; color: white; border: none;
+  padding: 10px 15px; border-radius: 10px; cursor: pointer; transition: 0.3s;
+}
+
+.add-btn:hover { background: #f5b301; }
+
+/* ------------------ صندوق التفاصيل ------------------ */
+.details-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  border-radius: 15px 15px 0 0;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(-20px);
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+  z-index: 2;
+}
+.details-box.show {
+  max-height: 250px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.details-box strong {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+  color: #f5b301;
+}
+.details-box .close-details {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #f5b301;
+  border: none;
+  color: #222;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.details-btn {
+  background: #f5b301;
+  color: #222;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.meal.show-img img {
+  transform: translateY(-50px);
+}
+
 /* توافق الجوال */
 @media(max-width:768px) {
   .details-box { font-size: 13px; }
@@ -157,100 +233,9 @@ header .imges {
   order: 0; /* الشعار على اليمين */
 }
 
-@media (max-width: 768px) {
-  nav { display: none; }
-  .menu-btn { display: block; }
-}
-
-    .meal {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.3s;
-    }
-
-    .meal:hover {
-      transform: translateY(-5px);
-    }
-
-    .meal img {
-      width: 100%;
-      border-radius: 15px;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .meal h3 {
-      margin: 10px 0 5px;
-      color: #333;
-    }
-
-    .price {
-      color: #f5b301;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .qty-control {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin: 10px 0;
-    }
-
-    .qty-control button {
-      background: #f5b301;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 18px;
-      width: 35px;
-      height: 35px;
-      cursor: pointer;
-    }
-
-    .add-btn {
-      background: #222;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .add-btn:hover {
-      background: #f5b301;
-    }
-    .flavor-type {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.flavor-type input {
-  display: none;
-}
-
-.flavor-type label {
-  background: #eee;
-  color: #333;
-  padding: 8px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-  border: 2px solid transparent;
-}
-
-.flavor-type input:checked + label {
-  background: #f5b301;
-  color: #fff;
-  border-color: #d4af37;
+@media(max-width:768px){
+  nav { display:none; }
+  .menu-btn { display:block; }
 }
    .meal {
       background: white;
@@ -341,108 +326,51 @@ header .imges {
       margin-inline: auto;
       color: #fff;
     }
-    header .imges {
-  order: 0; /* الشعار على اليمين */
-}
-/* ------------------ صندوق التفاصيل ------------------ */
-.details-box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.85);
-  color: #fff;
-  border-radius: 15px 15px 0 0;
-  padding: 15px 20px;
-  box-sizing: border-box;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
-  transform: translateY(-20px);
-  box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
-  z-index: 2;
-}
-.details-box.show {
-  max-height: 250px;
-  opacity: 1;
-  transform: translateY(0);
-}
-.details-box strong {
-  font-size: 16px;
-  margin-bottom: 5px;
-  display: block;
-  color: #f5b301;
-}
-.details-box .close-details {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #f5b301;
-  border: none;
-  color: #222;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-.details-btn {
-  background: #f5b301;
-  color: #222;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-bottom: 10px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.details-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-  </style>
 
-  <!-- الهيدر -->
-  <header>
- 
-    <nav>
+
+</style>
+</head>
+<body>
+<header>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+    <!-- زر الجوال على اليسار -->
+    <button class="menu-btn" id="menuBtn">☰</button>
+
+    <nav id="mainNav">
       <a href="index.html">🏠 الصفحة الرئيسية</a>
-      <a href="احجز طلبك الان.html">🍔 البرجر</a>
+      <a href="وجبات يوتيرن.html">🍖 اللحم ,الدجاج المدخن</a>
       <a href="طلبات التوست.html">🍞 التوست</a>
       <a href="طلبات الحلا.html">🍰 الحلا</a>
       <a href="طلبات القهوة.html">☕ القهوة</a>
-      <a href="وجبات يوتيرن.html">🍖 اللحم ,الدجاج المدخن</a>
+      <a href="الطلبات الجانبية.html">🍟 الطلبات الجانبية</a>
       <a href="طلبات الكومبير.html">🥔 الكومبير</a>
  <a class="add-btn" onclick="addToTable({i})"href="الطاولة.html">الطاولة</a>
     </nav>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
+    <!-- الشعار على اليمين -->
     <div class="imges">
       <img src="Saved Pictures/ال يو.jpg" alt="شعار المطعم" width="90" height="80">
     </div>
   </div>
 </header>
 
-  <!-- القائمة المنبثقة -->
-  <div class="mobile-menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
-    <div class="mobile-menu" id="mobileMenu">
-      <button class="close-btn" onclick="closeMenu(event)">✕</button>
-      <a href="index.html"><span>🏠</span> الصفحة الرئيسية</a>
-      <a href="وجبات يوتيرن.html"><span>🍖</span> اللحم ,الدجاج المدخن</a>
-      <a href="طلبات التوست.html"><span>🍞</span> التوست</a>
-      <a href="طلبات الحلا.html"><span>🍰</span> الحلا</a>
-      <a href="طلبات القهوة.html"><span>☕</span> القهوة</a>
-      <a href="الطلبات الجانبية.html"><span>🍔</span> البرجر</a>
-      <a href="طلبات الكومبير.html"><span>🥔</span> الكومبير</a>
- <a class="add-btn" onclick="addToTable({i})"href="الطاولة.html">الطاولة</a>
-    </div>
-  </div>
- 
 
-  <!-- قسم الوجبات -->
+
+<div class="mobile-menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" onclick="closeMenu(event)">✕</button>
+    <a href="index.html">🏠 الصفحة الرئيسية</a>
+    <a href="وجبات يوتيرن.html">🍖 اللحم ,الدجاج المدخن</a>
+    <a href="طلبات التوست.html">🍞 التوست</a>
+    <a href="طلبات الحلا.html">🍰 الحلا</a>
+    <a href="طلبات القهوة.html">☕ القهوة</a>
+    <a href="الطلبات الجانبية.html">🍟 الطلبات الجانبية</a>
+    <a href="طلبات الكومبير.html">🥔 الكومبير</a>
+ <a class="add-btn" onclick="addToTable({i})"href="الطاولة.html">الطاولة</a>
+  </div>
+</div>
+
+<!-- قسم الوجبات -->
   <main>
     <h2 style="text-align:center; margin:20px;"> 🍟 الطلبات الجانبية</h2>
     <div class="menu-container" id="meals">
@@ -452,20 +380,22 @@ header .imges {
 
   <!-- السكربت -->
 <script>
-  const overlay = document.getElementById('menuOverlay');
-  const mobileMenu = document.getElementById('mobileMenu');
+/* ------------------ قائمة الجوال ------------------ */
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const mobileMenu = document.getElementById('mobileMenu');
 
-  function toggleMenu() {
-    overlay.style.display = 'flex';
-    setTimeout(() => mobileMenu.classList.add('show'), 10);
-  }
+menuBtn.addEventListener('click', () => {
+  menuOverlay.style.display = 'flex';
+  setTimeout(()=> mobileMenu.classList.add('show'), 10);
+});
 
-  function closeMenu(e) {
-    if (e.target === overlay || e.target.classList.contains('close-btn')) {
-      mobileMenu.classList.remove('show');
-      setTimeout(() => overlay.style.display = 'none', 300);
-    }
+function closeMenu(e) {
+  if (e.target === menuOverlay || e.target.classList.contains('close-btn')) {
+    mobileMenu.classList.remove('show');
+    setTimeout(()=> menuOverlay.style.display='none', 300);
   }
+}
 
   const meals = [
     {name:'16 اجنحة دجاج', price:2200, img:'IMG-20251105-WA0019.jpg', ingredients: 'خبز برجر,شريحة اللحم125غ,شريحة الجبن, حشوات البرجر,بطاط الودجز|فرايز,مشروب غازي' },
@@ -565,3 +495,6 @@ function toggleDetails(i){
 
 </body>
 </html>
+
+
+ 

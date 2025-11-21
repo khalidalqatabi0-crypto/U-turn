@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قائمة البرجر | مطاعم يوتيرن</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap');
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  background-image: url('العائدين_الى_صنعاء.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(10px);
+  background-attachment: fixed;
+}
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap');
-
-    body{
-      background-image: url('IMG-20250829-WA0005.jpg');
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      backdrop-filter: blur(10px);
-      background-attachment: fixed;
-      
-    }
-    /* الهيدر */
- header {
+header {
       background: #222;
       color: white;
       display: flex;
@@ -115,107 +119,123 @@
   font-size: 14px;
   transition: 0.3s;
 }
-.mobile-menu a span {
-  margin-left: 10px;
+
+.details-btn:hover { background: #222; }
+
+.qty-control {
+  display: flex; justify-content: center; align-items: center;
+  gap: 10px; margin: 10px 0;
 }
 
-.close-btn {
+.qty-control button {
+  background: #f5b301; border: none; border-radius: 8px;
+  color: white; font-size: 18px; width: 35px; height: 35px; cursor: pointer;
+}
+
+.bread-options {
+  display: flex; justify-content: center; gap: 8px; margin: 10px 0;
+}
+
+.bread-option {
+  background: #eee; border: 2px solid #ccc; border-radius: 10px;
+  padding: 6px 10px; cursor: pointer; font-size: 15px; color: #333; transition: 0.3s;
+}
+
+.bread-option.active {
+  background: #f5b301; color: white; border-color: #f5b301;
+}
+
+.add-btn {
+  background: #222; color: white; border: none;
+  padding: 10px 15px; border-radius: 10px; cursor: pointer; transition: 0.3s;
+}
+
+.add-btn:hover { background: #f5b301; }
+
+/* ------------------ صندوق التفاصيل ------------------ */
+.details-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  border-radius: 15px 15px 0 0;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(-20px);
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+  z-index: 2;
+}
+.details-box.show {
+  max-height: 250px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.details-box strong {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+  color: #f5b301;
+}
+.details-box .close-details {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #f5b301;
+  border: none;
+  color: #222;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.details-btn {
+  background: #f5b301;
+  color: #222;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.meal.show-img img {
+  transform: translateY(-50px);
+}
+
+/* توافق الجوال */
+@media(max-width:768px) {
+  .details-box { font-size: 13px; }
+}
+.menu-btn {
+  display: none;
   background: none;
   border: none;
-  color: #555;
-  font-size: 28px;
-  position: absolute;
-  right: 25px;
-  top: 15px;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  nav { display: none; }
-  .menu-btn { display: block; }
-}
-
-    .meal {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.3s;
-    }
-
-    .meal:hover {
-      transform: translateY(-5px);
-    }
-
-    .meal img {
-      width: 100%;
-      border-radius: 15px;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .meal h3 {
-      margin: 10px 0 5px;
-      color: #333;
-    }
-
-    .price {
-      color: #f5b301;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .qty-control {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin: 10px 0;
-    }
-
-    .qty-control button {
-      background: #f5b301;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 18px;
-      width: 35px;
-      height: 35px;
-      cursor: pointer;
-    }
-
-    .add-btn {
-      background: #222;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .add-btn:hover {
-      background: #f5b301;
-    }
-    .bread-type {
-  margin: 10px 0;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-.bread-type label {
-  background: #eee;
-  padding: 5px 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s;
-}
-.bread-type input[type="radio"] {display: none;}
-.bread-type input[type="radio"]:checked + label {
-  background: #f5b301;
   color: white;
+  font-size: 26px;
+  cursor: pointer;
+  order: 1; /* الزر على اليسار */
+}
+
+header .imges {
+  order: 0; /* الشعار على اليمين */
+}
+
+@media(max-width:768px){
+  nav { display:none; }
+  .menu-btn { display:block; }
 }
    .meal {
       background: white;
@@ -306,149 +326,76 @@
       margin-inline: auto;
       color: #fff;
     }
-    header .imges {
-  order: 0; /* الشعار على اليمين */
-}
-/* ------------------ صندوق التفاصيل ------------------ */
-.details-box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.85);
-  color: #fff;
-  border-radius: 15px 15px 0 0;
-  padding: 15px 20px;
-  box-sizing: border-box;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
-  transform: translateY(-20px);
-  box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
-  z-index: 2;
-}
-.details-box.show {
-  max-height: 250px;
-  opacity: 1;
-  transform: translateY(0);
-}
-.details-box strong {
-  font-size: 16px;
-  margin-bottom: 5px;
-  display: block;
-  color: #f5b301;
-}
-.details-box .close-details {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #f5b301;
-  border: none;
-  color: #222;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-.details-btn {
-  background: #f5b301;
-  color: #222;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-bottom: 10px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.details-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-/* توافق الجوال */
-@media(max-width:768px) {
-  .details-box { font-size: 13px; }
-}
-.menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 26px;
-  cursor: pointer;
-  order: 1; /* الزر على اليسار */
-}
-
-header .imges {
-  order: 0; /* الشعار على اليمين */
-}
 
 
-  </style>
+</style>
+</head>
+<body>
+<header>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+    <!-- زر الجوال على اليسار -->
+    <button class="menu-btn" id="menuBtn">☰</button>
 
-  <!-- الهيدر -->
-  <header>
-  
-    <nav>
+    <nav id="mainNav">
       <a href="index.html">🏠 الصفحة الرئيسية</a>
-      <a href="احجز طلبك الان.html">🍔 البرجر</a>
       <a href="وجبات يوتيرن.html">🍖 اللحم ,الدجاج المدخن</a>
+      <a href="طلبات التوست.html">🍞 التوست</a>
       <a href="طلبات الحلا.html">🍰 الحلا</a>
       <a href="طلبات القهوة.html">☕ القهوة</a>
       <a href="الطلبات الجانبية.html">🍟 الطلبات الجانبية</a>
       <a href="طلبات الكومبير.html">🥔 الكومبير</a>
  <a class="add-btn" onclick="addToTable({i})"href="الطاولة.html">الطاولة</a>
     </nav>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-      <div class="imges">
+
+    <!-- الشعار على اليمين -->
+    <div class="imges">
       <img src="Saved Pictures/ال يو.jpg" alt="شعار المطعم" width="90" height="80">
     </div>
   </div>
 </header>
-  </header>
 
-  <!-- القائمة المنبثقة -->
-  <div class="mobile-menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
-    <div class="mobile-menu" id="mobileMenu">
-      <button class="close-btn" onclick="closeMenu(event)">✕</button>
-      <a href="index.html"><span>🏠</span> الصفحة الرئيسية</a>
-      <a href="وجبات يوتيرن.html"><span>🍖</span> اللحم ,الدجاج المدخن</a>
-      <a href="احجز طلبك الان.html"><span>🍔</span> البرجر</a>
-      <a href="طلبات الحلا.html"><span>🍰</span> الحلا</a>
-      <a href="طلبات القهوة.html"><span>☕</span> القهوة</a>
-      <a href="الطلبات الجانبية.html"><span>🍟</span> الطلبات الجانبية</a>
-      <a href="طلبات الكومبير.html"><span>🥔</span> الكومبير</a>
+
+
+<div class="mobile-menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" onclick="closeMenu(event)">✕</button>
+    <a href="index.html">🏠 الصفحة الرئيسية</a>
+    <a href="وجبات يوتيرن.html">🍖 اللحم ,الدجاج المدخن</a>
+    <a href="طلبات التوست.html">🍞 التوست</a>
+    <a href="طلبات الحلا.html">🍰 الحلا</a>
+    <a href="طلبات القهوة.html">☕ القهوة</a>
+    <a href="الطلبات الجانبية.html">🍟 الطلبات الجانبية</a>
+    <a href="طلبات الكومبير.html">🥔 الكومبير</a>
  <a class="add-btn" onclick="addToTable({i})"href="الطاولة.html">الطاولة</a>
-    </div>
   </div>
+</div>
 
-  <!-- قسم الوجبات -->
-  <main>
-    <h2 style="text-align:center; margin:20px;">🍞  التوست</h2>
-    <div class="menu-container" id="meals">
-      <!-- يتم إنشاء الوجبات عبر الجافاسكربت -->
-    </div>
-  </main>
+<main>
+  <h2 style="text-align:center; margin:20px;"> 🍔 البرجر</h2>
+  <div class="menu-container" id="meals"></div>
+</main>
 
-  <!-- السكربت -->
+
 <script>
-  const overlay = document.getElementById('menuOverlay');
-  const mobileMenu = document.getElementById('mobileMenu');
+  
+  
+ /* ------------------ قائمة الجوال ------------------ */
+/* ------------------ قائمة الجوال ------------------ */
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const mobileMenu = document.getElementById('mobileMenu');
 
-  function toggleMenu() {
-    overlay.style.display = 'flex';
-    setTimeout(() => mobileMenu.classList.add('show'), 10);
-  }
+menuBtn.addEventListener('click', () => {
+  menuOverlay.style.display = 'flex';
+  setTimeout(()=> mobileMenu.classList.add('show'), 10);
+});
 
-  function closeMenu(e) {
-    if (e.target === overlay || e.target.classList.contains('close-btn')) {
-      mobileMenu.classList.remove('show');
-      setTimeout(() => overlay.style.display = 'none', 300);
-    }
+function closeMenu(e) {
+  if (e.target === menuOverlay || e.target.classList.contains('close-btn')) {
+    mobileMenu.classList.remove('show');
+    setTimeout(()=> menuOverlay.style.display='none', 300);
   }
+}
 
   const meals = [
     {name:'توست اومليت', price:1100, img:'احنا.jpg', ingredients: 'خبز التوست,2بيض,تبولة,لانشون,ملح,صوص رانش,جبنة شرائح' },
@@ -544,8 +491,10 @@ function toggleDetails(i){
 
     alert("✅ تمت إضافة الوجبة إلى الطاولة بنجاح!");
   }
+  
 </script>
 
 
 </body>
 </html>
+
