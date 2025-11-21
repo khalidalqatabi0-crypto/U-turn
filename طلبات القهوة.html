@@ -134,9 +134,28 @@ header {
   top: 15px;
   cursor: pointer;
 }
+/* توافق الجوال */
+@media(max-width:768px) {
+  .details-box { font-size: 13px; }
+}
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  order: 1; /* الزر على اليسار */
+}
+
+header .imges {
+  order: 0; /* الشعار على اليمين */
+}
+
 
 @media (max-width: 768px) {
- .details-box { font-size: 13px; }
+  nav { display: none; }
+  .menu-btn { display: block; }
 }
 
     .meal {
